@@ -1,57 +1,69 @@
 /**
  * MyUnitCubeQuad
+ * @param gl {WebGLRenderingContext}
  * @constructor
  */
+ const rad =  Math.PI/180;
+
 class MyUnitCubeQuad extends CGFobject
 {
 	constructor(scene) 
 	{
 		super(scene);
-
-		this.quad = new MyQuad(this.scene);
+		this.quad=new MyQuad(this.scene);
+		this.quad.initBuffers();
+		
 	};
 
-	display() 
-	{
-		// front face
-		this.scene.pushMatrix();
-		this.scene.translate(0, 0, 0.5);
-		this.quad.display();
-		this.scene.popMatrix();
+	display(){
+	
 
-		// back face
-		this.scene.pushMatrix();
-		this.scene.rotate(180 * degToRad, 1, 0, 0);
-		this.scene.translate(0, 0, 0.5);
-		this.quad.display();
-		this.scene.popMatrix();
+    // Frente 
+    this.scene.pushMatrix();
+    this.scene.translate(0,0,0.5);
+    this.quad.display();
+	this.scene.popMatrix();
+	
+	// Tras 
+	this.scene.pushMatrix();
+	this.scene.rotate(Math.PI,1,0,0);
+	 this.scene.translate(0,0,0.5);
+	this.quad.display();
+	this.scene.popMatrix();
 
-		// top face
-		this.scene.pushMatrix();
-		this.scene.rotate(-90 * degToRad, 1, 0, 0);
-		this.scene.translate(0, 0, 0.5);
-		this.quad.display();
-		this.scene.popMatrix();
+    // Baixo 
+    this.scene.pushMatrix();
+    this.scene.rotate(Math.PI/2,1,0,0);
+    this.scene.translate(0,0,0.5);
+    this.quad.display();
+    this.scene.popMatrix();
 
-		// back face
-		this.scene.pushMatrix();
-		this.scene.rotate(90 * degToRad, 1, 0, 0);
-		this.scene.translate(0, 0, 0.5);
-		this.quad.display();
-		this.scene.popMatrix();
 
-		// right face
-		this.scene.pushMatrix();
-		this.scene.rotate(-90 * degToRad, 0, 1, 0);
-		this.scene.translate(0, 0, 0.5);
-		this.quad.display();
-		this.scene.popMatrix();
 
-		// left face
-		this.scene.pushMatrix();
-		this.scene.rotate(90 * degToRad, 0, 1, 0);
-		this.scene.translate(0, 0, 0.5);
-		this.quad.display();
-		this.scene.popMatrix();
-	};
+     // Cima
+    this.scene.pushMatrix();
+    this.scene.rotate(3*Math.PI/2,1,0,0);
+     this.scene.translate(0,0,0.5);
+    this.quad.display();
+    this.scene.popMatrix();
+
+     // Esquerda
+	 this.scene.pushMatrix();
+	 this.scene.rotate(3*Math.PI/2,0,1,0);
+	 this.scene.translate(0,0,0.5);
+	 this.quad.display();
+	 this.scene.popMatrix();
+	
+    /* Direita */
+    this.scene.pushMatrix();
+    this.scene.rotate(Math.PI/2,0,1,0);
+    this.scene.translate(0,0,0.5);
+    this.quad.display();
+    this.scene.popMatrix();
+
+	
+
+	}
+
+
 };
