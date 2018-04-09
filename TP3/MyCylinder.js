@@ -31,7 +31,7 @@ MyCylinder.prototype.initBuffers = function () {
  		}
  	}
 
- 	this.indices=[/*0,1,this.slices+1,0,this.slices+1,this.slices*/];
+ 	this.indices=[];
 
 	for(i=0; i < this.stacks;i++){
 		for(j=0; j < this.slices;j++){
