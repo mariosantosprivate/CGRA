@@ -8,10 +8,9 @@ class MyTable extends CGFobject
 {
 	constructor(scene) 
 	{
-		super(scene);
-		this.cube=new MyUnitCubeQuad(this.scene);
-		this.cube.initBuffers();
+        super(scene);
         
+        this.materialDefault = new CGFappearance(this.scene);
         
 		this.scene.tableAppearance = new CGFappearance(this.scene);
 		this.scene.tableAppearance.loadTexture("../resources/images/table.png");
@@ -25,16 +24,18 @@ class MyTable extends CGFobject
         this.scene.pernas.setDiffuse(0.8,0.8,0.8,1);
         this.scene.pernas.setSpecular(0.9,0.9,0.9,1);
         this.scene.pernas.setShininess(120);
+    
+        this.myUnitCubeQuad = new MyUnitCubeQuad(this.scene);
     };
 
 display(){
 
-    //tableAppearance
+    //tableAppearancemyUnitCubeQuad
     this.scene.pushMatrix();
     this.scene.translate(0,3.61,0);
     this.scene.scale(5,0.3,3);
     this.scene.tableAppearance.apply();
-    this.cube.display();
+    this.myUnitCubeQuad.display();
     this.scene.popMatrix();
        
     
@@ -44,7 +45,7 @@ display(){
     this.scene.translate(-2.35,1.70,1.35);
     this.scene.scale(0.3,3.5,0.3);
     this.scene.pernas.apply();
-    this.cube.display();
+    this.myUnitCubeQuad.display();
     this.scene.popMatrix();
 
     //Perna do inferior direito
@@ -53,7 +54,7 @@ display(){
     this.scene.translate(2.35,1.71,1.35);
     this.scene.scale(0.3,3.5,0.3);
     this.scene.pernas.apply();
-    this.cube.display();
+    this.myUnitCubeQuad.display();
     this.scene.popMatrix();
 
     //Perna do canto superior esquerdo
@@ -62,7 +63,7 @@ display(){
     this.scene.translate(2.35,1.70,-1.35);
     this.scene.scale(0.3,3.5,0.3);
     this.scene.pernas.apply();
-    this.cube.display();
+    this.myUnitCubeQuad.display();
     this.scene.popMatrix();
 
     //Perna do superior direito
@@ -71,7 +72,7 @@ display(){
     this.scene.translate(-2.35,1.70,-1.35);
     this.scene.scale(0.3,3.5,0.3);
     this.scene.pernas.apply();
-    this.cube.display();
+    this.myUnitCubeQuad.display();
     this.scene.popMatrix();
 
 

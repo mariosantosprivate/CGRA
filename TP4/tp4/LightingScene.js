@@ -38,7 +38,9 @@ class LightingScene extends CGFscene
 		this.lamp = new MyLamp(this, 100, 100);
 		this.boardA = new Plane(this, BOARD_A_DIVISIONS, 0, 1, 0, 1);
 		this.boardB = new Plane(this, BOARD_B_DIVISIONS, 0, 1, 0, 1);
-
+		this.pillarA = new MyCylinder(this, 6, 20);
+		this.pillarB = new MyCylinder(this,6,20);
+		
 		// Materials
 		
 		/*Textures*/ 
@@ -94,7 +96,11 @@ class LightingScene extends CGFscene
 		this.boardAppearance.setSpecular(0.5,0.5,0.5,1);
 		this.boardAppearance.setShininess(200);
 
-
+		this.pillarAppearance = new CGFappearance(this);
+		this.pillarAppearance.loadTexture("../resources/images/pillar.png");
+		this.pillarAppearance.setDiffuse(0.2,0.2,0.2,1);
+		this.pillarAppearance.setSpecular(0.5,0.5,0.5,1);
+		this.pillarAppearance.setShininess(200);
 	};
 
 	initCameras() 
@@ -230,16 +236,35 @@ class LightingScene extends CGFscene
 
 		// Board B
 		this.pushMatrix();
-		this.translate(10.5, 4.5, 0.2);
-		this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);
-		this.slideAppearance.apply();
-		this.boardB.display();
+			this.translate(10.5, 4.5, 0.2);
+			this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);
+			this.slideAppearance.apply();
+			this.boardB.display();
+		this.popMatrix();
+		
+		// Lamp
+		this.pushMatrix();
+			this.translate(7, 7, 7);
+			this.rotate(-Math.PI / 2, 1, 0, 0);
+			this.lamp.display();
 		this.popMatrix();
 
+		// Pillar A
 		this.pushMatrix();
-		this.translate(7, 7, 7);
-		this.rotate(-Math.PI / 2, 1, 0, 0);
-		this.lamp.display();
+			this.pillarAppearance.apply();
+			this.translate(14,0,14);
+			this.scale(1,5,1);	
+			this.rotate(-Math.PI/2,1,0,0);
+			this.pillarA.display();
+		this.popMatrix();
+
+		// Pillar B
+		this.pushMatrix();
+			this.pillarAppearance.apply();
+			this.translate(2,0,14);
+			this.scale(1,5,1);	
+			this.rotate(-Math.PI/2,1,0,0);
+			this.pillarB.display();
 		this.popMatrix();
 
 		// ---- END Scene drawing section

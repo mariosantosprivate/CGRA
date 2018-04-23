@@ -63,7 +63,5 @@ class MyUnitCubeQuad extends CGFobject
 
 	
 
-	}
-
-
+	};
 };

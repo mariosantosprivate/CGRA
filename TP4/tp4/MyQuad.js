@@ -1,35 +1,35 @@
-/**
+/*
  * MyQuad
- * @param gl {WebGLRenderingContext}
- * @constructor
  */
-function MyQuad(scene, minS, maxS, minT, maxT) {
-	CGFobject.call(this,scene);
 
-	this.minS = minS || 0.0;
-	this.maxS = maxS || 1.0;
-	this.minT = minT || 0.0;
-	this.maxT = maxT || 1.0;
 
-	this.initBuffers();
-};
+ class MyQuad extends CGFobject
+ {
+	constructor(scene,minS,maxS,minT,maxT)
+ 	{
+		super(scene);
 
-MyQuad.prototype = Object.create(CGFobject.prototype);
-MyQuad.prototype.constructor=MyQuad;
+		this.minS = minS || 0.0;
+		this.maxS = maxS || 1.0;
+		this.minT = minT || 0.0;
+		this.maxT = maxT || 1.0;
 
-MyQuad.prototype.initBuffers = function () {
+		this.initBuffers();
+	};
+
+	initBuffers(){
 	this.vertices = [
-            -0.5, -0.5, 0,
-            0.5, -0.5, 0,
-            -0.5, 0.5, 0,
-            0.5, 0.5, 0
-			];
+		-0.5, -0.5, 0,
+		0.5, -0.5, 0,
+		-0.5, 0.5, 0,
+		0.5, 0.5, 0
+		];
 
 	this.indices = [
-            0, 1, 2, 
+			0, 1, 2, 
 			3, 2, 1
 		];
-	
+
 	this.normals = [
 			0, 0, 1,
 			0, 0, 1,
@@ -47,4 +47,5 @@ MyQuad.prototype.initBuffers = function () {
 		
 	this.primitiveType=this.scene.gl.TRIANGLES;
 	this.initGLBuffers();
+		};
 };
