@@ -39,7 +39,7 @@ class LightingScene extends CGFscene
 		this.boardA = new Plane(this, BOARD_A_DIVISIONS, 0, 1, 0, 1);
 		this.boardB = new Plane(this, BOARD_B_DIVISIONS, 0, 1, 0, 1);
 		this.clock = new MyClock(this);
-
+		this.plane = new MyPaperPlane(this, 14, 4, 8);
 		// Materials
 		
 		/*Textures*/ 
@@ -100,6 +100,12 @@ class LightingScene extends CGFscene
 		this.clockAppearance.setDiffuse(0.5,0.5,0.5,1);
 		this.clockAppearance.setSpecular(0.5,0.5,0.5,1);
 		this.clockAppearance.setShininess(200);
+
+		this.paperPlane = new CGFappearance(this,14,4,8);
+		this.paperPlane.setDiffuse(1.0,1.0,1.0,1);
+		this.paperPlane.setSpecular(0.5,0.5,0.5,1);
+		this.paperPlane.setAmbient(1.0,1.0,1.0,1);
+		this.paperPlane.setShininess(200);
 
 		this.setUpdatePeriod(100)
 
@@ -162,12 +168,6 @@ class LightingScene extends CGFscene
 			this.lights[i].update();
 	}
 
-	update(currTime){
-		this.lastTime = this.lastTime || 0;
-		this.deltaTime = currTime - this.lastTime;
-		this.lastTime = currTime;
-		this.clock.update(this.deltaTime);
-	}
 	display() 
 	{
 		// ---- BEGIN Background, camera and axis setup
@@ -263,6 +263,12 @@ class LightingScene extends CGFscene
 		this.clock.display();
 		this.popMatrix();
 
+		// Plane
+		this.pushMatrix();
+			this.paperPlane.apply();
+			this.plane.display();
+		this.popMatrix();
+
 		// ---- END Scene drawing section
 	};
 
@@ -275,6 +281,9 @@ class LightingScene extends CGFscene
 		this.lastTime = currTime;
 
 		this.clock.update(this.deltaTime);
+
+		if(this.deltaTime <= 1000)
+		this.plane.update(this.deltaTime);
 
 	}
 };
