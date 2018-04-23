@@ -38,9 +38,10 @@ class LightingScene extends CGFscene
 		this.lamp = new MyLamp(this, 100, 100);
 		this.boardA = new Plane(this, BOARD_A_DIVISIONS, 0, 1, 0, 1);
 		this.boardB = new Plane(this, BOARD_B_DIVISIONS, 0, 1, 0, 1);
-		this.pillarA = new MyCylinder(this, 6, 20);
-		this.pillarB = new MyCylinder(this,6,20);
-		
+		this.clock=new MyCylinder(this, 12, 1);
+		this.clockface = new MyClock(this);
+		this.clockfaceB= new MyQuad(this, -1, 1, -1, 1);
+
 		// Materials
 		
 		/*Textures*/ 
@@ -96,11 +97,12 @@ class LightingScene extends CGFscene
 		this.boardAppearance.setSpecular(0.5,0.5,0.5,1);
 		this.boardAppearance.setShininess(200);
 
-		this.pillarAppearance = new CGFappearance(this);
-		this.pillarAppearance.loadTexture("../resources/images/pillar.png");
-		this.pillarAppearance.setDiffuse(0.2,0.2,0.2,1);
-		this.pillarAppearance.setSpecular(0.5,0.5,0.5,1);
-		this.pillarAppearance.setShininess(200);
+		this.clockAppearance = new CGFappearance(this);
+		this.clockAppearance.loadTexture("../resources/images/clock.png");
+		this.clockAppearance.setDiffuse(0.5,0.5,0.5,1);
+		this.clockAppearance.setSpecular(0.5,0.5,0.5,1);
+		this.clockAppearance.setShininess(200);
+
 	};
 
 	initCameras() 
@@ -160,7 +162,12 @@ class LightingScene extends CGFscene
 			this.lights[i].update();
 	}
 
-
+	update(currTime){
+		this.lastTime = this.lastTime || 0;
+		this.deltaTime = currTime - this.lastTime;
+		this.lastTime = currTime;
+		this.clock.update(this.deltaTime);
+	}
 	display() 
 	{
 		// ---- BEGIN Background, camera and axis setup
@@ -236,35 +243,31 @@ class LightingScene extends CGFscene
 
 		// Board B
 		this.pushMatrix();
-			this.translate(10.5, 4.5, 0.2);
-			this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);
-			this.slideAppearance.apply();
-			this.boardB.display();
-		this.popMatrix();
-		
-		// Lamp
-		this.pushMatrix();
-			this.translate(7, 7, 7);
-			this.rotate(-Math.PI / 2, 1, 0, 0);
-			this.lamp.display();
+		this.translate(10.5, 4.5, 0.2);
+		this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);
+		this.slideAppearance.apply();
+		this.boardB.display();
 		this.popMatrix();
 
-		// Pillar A
 		this.pushMatrix();
-			this.pillarAppearance.apply();
-			this.translate(14,0,14);
-			this.scale(1,5,1);	
-			this.rotate(-Math.PI/2,1,0,0);
-			this.pillarA.display();
+		this.translate(7, 7, 7);
+		this.rotate(-Math.PI / 2, 1, 0, 0);
+		this.lamp.display();
 		this.popMatrix();
 
-		// Pillar B
+		//Clock
 		this.pushMatrix();
-			this.pillarAppearance.apply();
-			this.translate(2,0,14);
-			this.scale(1,5,1);	
-			this.rotate(-Math.PI/2,1,0,0);
-			this.pillarB.display();
+		this.translate(7.25,7.2, 0);
+		this.scale(0.5, 0.5, 0.2);
+		this.clock.display();
+		this.popMatrix();
+
+		//Clockface
+		this.pushMatrix();
+		this.translate(2,2, 2);
+		this.scale(2, 2, 1);
+		this.clockAppearance.apply();
+		this.clockface.display();
 		this.popMatrix();
 
 		// ---- END Scene drawing section
