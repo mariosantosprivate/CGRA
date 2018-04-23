@@ -38,9 +38,7 @@ class LightingScene extends CGFscene
 		this.lamp = new MyLamp(this, 100, 100);
 		this.boardA = new Plane(this, BOARD_A_DIVISIONS, 0, 1, 0, 1);
 		this.boardB = new Plane(this, BOARD_B_DIVISIONS, 0, 1, 0, 1);
-		this.clock=new MyCylinder(this, 12, 1);
-		this.clockface = new MyClock(this);
-		this.clockfaceB= new MyQuad(this, -1, 1, -1, 1);
+		this.clock = new MyClock(this);
 
 		// Materials
 		
@@ -102,6 +100,8 @@ class LightingScene extends CGFscene
 		this.clockAppearance.setDiffuse(0.5,0.5,0.5,1);
 		this.clockAppearance.setSpecular(0.5,0.5,0.5,1);
 		this.clockAppearance.setShininess(200);
+
+		this.setUpdatePeriod(100)
 
 	};
 
@@ -255,21 +255,26 @@ class LightingScene extends CGFscene
 		this.lamp.display();
 		this.popMatrix();
 
-		//Clock
+		// Clock
 		this.pushMatrix();
-		this.translate(7.25,7.2, 0);
-		this.scale(0.5, 0.5, 0.2);
+		this.boardAppearance.apply();
+		this.translate(7.25, 7.25, 0.2);
+		this.scale(BOARD_WIDTH, BOARD_HEIGHT, 1);
 		this.clock.display();
-		this.popMatrix();
-
-		//Clockface
-		this.pushMatrix();
-		this.translate(2,2, 2);
-		this.scale(2, 2, 1);
-		this.clockAppearance.apply();
-		this.clockface.display();
 		this.popMatrix();
 
 		// ---- END Scene drawing section
 	};
+
+	update(currTime)
+	{
+		this.lastTime = this.lastTime || 0;
+
+		this.deltaTime = currTime - this.lastTime;
+
+		this.lastTime = currTime;
+
+		this.clock.update(this.deltaTime);
+
+	}
 };
