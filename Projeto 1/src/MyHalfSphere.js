@@ -1,8 +1,8 @@
 /**
- * MyLamp
+ * MyHalfSphere
  */
 
-class MyLamp extends CGFobject
+class MyHalfSphere extends CGFobject
 {
     constructor(scene, slices, stacks){
         super(scene);

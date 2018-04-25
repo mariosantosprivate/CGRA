@@ -15,6 +15,8 @@ class MyTractor extends CGFobject
         this.rightEngineBay = new MyLongTrapMirror(this.scene);
         this.side = new MyTrap(this.scene);
         this.front = new MyQuad(this.scene);
+        this.light = new MyHalfSphere(this.scene, 100, 100);
+        this.sideWindow = new MyQuad(this.scene);
 
         this.bodyAppearance = new CGFappearance(this.scene);
         this.bodyAppearance.loadTexture('../resources/images/tractor.png');
@@ -37,12 +39,14 @@ class MyTractor extends CGFobject
 		this.windowAppearance.setDiffuse(0.6,0.6,0.6,1);
 		this.windowAppearance.setSpecular(0.8,0.8,0.8,1);	
         this.windowAppearance.setShininess(200);
+
+        this.lightAppearance = new CGFappearance(this.scene);
+		this.lightAppearance.setAmbient(0.9,0.9,0.5,1);
+		this.lightAppearance.setDiffuse(0.9,0.9,0.5,1);
+		this.lightAppearance.setSpecular(0.9,0.9,0.5,1);	
+        this.lightAppearance.setShininess(200);
         
-        this.windowAppearance2 = new CGFappearance(this.scene);
-		this.windowAppearance2.setAmbient(0.2,0.6,1,1);
-		this.windowAppearance2.setDiffuse(0.6,0.6,0.6,1);
-		this.windowAppearance2.setSpecular(0.8,0.8,0.8,1);	
-		this.windowAppearance2.setShininess(200);
+
     
     };
 
@@ -53,7 +57,7 @@ class MyTractor extends CGFobject
             //Right Engine Bay
             this.scene.pushMatrix();
             //ligeiro offset para evitar "z fighting"
-            this.scene.translate(0,0.5,-0.01);
+            this.scene.translate(0,0.5,0.01);
             this.scene.scale(2,1,0);
             this.bodyAppearance.apply();
             this.rightEngineBay.display();
@@ -90,8 +94,8 @@ class MyTractor extends CGFobject
         //Front
         this.scene.pushMatrix();
         this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
-        this.scene.translate(1,0.5,2);
-        this.scene.scale(2.02,1.0,2.0);
+        this.scene.translate(1.0,0.49,2);
+        this.scene.scale(2.05,1,2.0);
         this.front.display();
         this.scene.popMatrix();
 
@@ -162,6 +166,39 @@ class MyTractor extends CGFobject
         this.scene.scale(1.9,0.7,0);
         this.windowAppearance.apply()
         this.front.display();
+        this.scene.popMatrix();
+
+        //Right Side Window
+        this.scene.pushMatrix();
+        this.scene.rotate(degToRad*180,0,1,0);
+        this.scene.translate(-1,1.7,0.01);
+        this.scene.scale(0.4,0.45,0.4);
+        this.windowAppearance.apply();
+        this.side.display();
+        this.scene.popMatrix();
+        
+        //Left Side Window
+        this.scene.pushMatrix();
+        this.scene.translate(1,1.7,2.01);
+        this.scene.scale(0.4,0.45,0.4);
+        this.windowAppearance.apply();
+        this.side.display();
+        this.scene.popMatrix();
+               
+        //Lights
+        this.scene.pushMatrix();
+        this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
+        this.scene.translate(0.3,0.8,2);
+        this.scene.scale(0.15,0.15,0.05);
+        this.lightAppearance.apply();
+        this.light.display();
+        this.scene.popMatrix();
+        this.scene.pushMatrix();
+        this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
+        this.scene.translate(1.7,0.8,2);
+        this.scene.scale(0.15,0.15,0.05);
+        this.lightAppearance.apply();
+        this.light.display();
         this.scene.popMatrix();
 
 
