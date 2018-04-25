@@ -50,6 +50,13 @@ class LightingScene extends CGFscene
 		
 		this.materialDefault = new CGFappearance(this);
 		
+		this.Light0=true; 
+		this.Light1=true; 
+		this.Light2=true;
+		this.Light3=true;
+		this.speed=3;
+		this.Axis=true;
+
 
 	};
 
@@ -60,40 +67,39 @@ class LightingScene extends CGFscene
 
 	initLights() 
 	{
-		this.setGlobalAmbientLight(1,1,1,1);
+		this.setGlobalAmbientLight(0,0,0,1);
 		//this.setGlobalAmbientLight(0,0,0,1);
 		// Positions for four lights
-		this.lights[0].setPosition(4, 6, 1, 1);
-		this.lights[0].setVisible(false); // show marker on light position (different from enabled)
+		this.lights[0].setPosition(4, 4, 4, 1);
+		this.lights[0].setVisible(true); // show marker on light position (different from enabled)
 
 
-		this.lights[1].setPosition(10.5, 6.0, 1.0, 1.0);
-		this.lights[1].setVisible(false); // show marker on light position (different from enabled)
+		this.lights[1].setPosition(4, 4, -4, 1);
+		this.lights[1].setVisible(true); // show marker on light position (different from enabled)
 
-		this.lights[2].setPosition(10.5, 6.0, 5.0, 1.0);
-		this.lights[2].setVisible(false); // show marker on light position (different from enabled)
+		this.lights[2].setPosition(-4, 4, 4, 1);
+		this.lights[2].setVisible(true); // show marker on light position (different from enabled)
 		
 		
-		this.lights[3].setPosition(4, 6.0, 5.0, 1.0);
-		this.lights[3].setVisible(false);
-		this.lights[3].enable(true);
+		this.lights[3].setPosition(-4, 4, -4, 1);
+		this.lights[3].setVisible(true);
 
 		// Properties
 		this.lights[0].setAmbient(0, 0, 0, 1);
 		this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
 		this.lights[0].setSpecular(1,1,0,1);
-		this.lights[0].enable();
+		this.lights[0].enable(this.Light0);
 
 		this.lights[1].setAmbient(0, 0, 0, 1);
 		this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
-		this.lights[1].enable();
+		this.lights[1].enable(this.Light1);
 
 		this.lights[2].setAmbient(0, 0, 0, 1);
 		this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1.0);
 		this.lights[2].setConstantAttenuation(0);
 		this.lights[2].setLinearAttenuation(0.2);
 		this.lights[2].setQuadraticAttenuation(0);
-		this.lights[2].enable();
+		this.lights[2].enable(this.Light2);
 
 		this.lights[3].setAmbient(0, 0, 0, 1);
 		this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0);
@@ -101,11 +107,19 @@ class LightingScene extends CGFscene
 		this.lights[3].setConstantAttenuation(0);
 		this.lights[3].setLinearAttenuation(0);
 		this.lights[3].setQuadraticAttenuation(0.2);
-		this.lights[3].enable();
+		this.lights[3].enable(this.Light3);
 	};
 
 	updateLights() 
 	{
+		this.lights[0].enable(this.Light0);
+		this.lights[0].setVisible(this.Light0);
+		this.lights[1].enable(this.Light1);
+		this.lights[1].setVisible(this.Light1);
+		this.lights[2].enable(this.Light2);
+		this.lights[2].setVisible(this.Light2);
+		this.lights[3].enable(this.Light3);
+		this.lights[3].setVisible(this.Light3);
 		for (var i = 0; i < this.lights.length; i++)
 			this.lights[i].update();
 	}
@@ -129,7 +143,10 @@ class LightingScene extends CGFscene
 		this.updateLights();
 
 		// Draw axis
-		this.axis.display();
+		if(this.Axis == true){
+			this.axis.display();
+		}
+		
 
 		this.materialDefault.apply();
 
@@ -167,4 +184,7 @@ class LightingScene extends CGFscene
 		this.plane.update(this.deltaTime);
 
 	}
+
+	doSomething()
+	{ console.log("Doing something..."); };
 };
