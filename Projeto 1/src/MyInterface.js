@@ -32,8 +32,8 @@ class MyInterface extends CGFinterface {
 
 		// add a group of controls (and open/expand by defult)
 
-		var Lgroup=this.gui.addFolder("Luzes");
-		Lgroup.open();
+		var Lgroup=this.gui.addFolder("Lights");
+		//Lgroup.open();
 
 		// add two check boxes to the group. The identifiers must be members variables of the scene initialized in scene.init as boolean
 		// e.g. this.option1=true; this.option2=false;

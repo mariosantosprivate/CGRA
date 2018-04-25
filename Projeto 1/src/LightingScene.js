@@ -50,10 +50,10 @@ class LightingScene extends CGFscene
 		
 		this.materialDefault = new CGFappearance(this);
 		
-		this.Light0=true; 
-		this.Light1=true; 
-		this.Light2=true;
-		this.Light3=true;
+		this.Light0=false; 
+		this.Light1=false;  
+		this.Light2=false; 
+		this.Light3=false; 
 		this.speed=3;
 		this.Axis=true;
 
@@ -81,7 +81,7 @@ class LightingScene extends CGFscene
 		this.lights[2].setVisible(true); // show marker on light position (different from enabled)
 		
 		
-		this.lights[3].setPosition(-4, 4, -4, 1);
+		this.lights[3].setPosition(-1,5, 1, 1);
 		this.lights[3].setVisible(true);
 
 		// Properties

@@ -4,39 +4,36 @@
 
 class MyCircle extends CGFobject
 {
-	constructor(scene)
+	constructor(scene, slices)
 	{
-		super(scene);
+        super(scene);
+        this.slices = slices || 12;
 		this.initBuffers();
 	};
 
 	initBuffers() 
 	{
 
+        var angle = 2*Math.PI/this.slices;
+        var a = 0;
+
         this.vertices =[];
         this.indices =[];
         this.normals =[];
         this.texCoords = [];
 
-        var angle = 0;
-        this.vertices.push(0,0,0);
-        this.normals.push(0, 0, 1);
-        this.texCoords.push(0.5, 0.5);
+        
 
-        for(var i = 0; i <= 12; i++) {
-            this.vertices.push(Math.cos(angle), Math.sin(angle), 0);
-            this.texCoords.push(0.5*Math.cos(angle)+0.5, 0.5 - 0.5*Math.sin(angle));
 
-            angle += 2*Math.PI / 12; 
+        for(var i = 0; i <= this.slices; i++) {
+            this.vertices.push(Math.cos(i*angle), Math.sin(i*angle), 0);
             this.normals.push(0, 0, 1);
-
+            this.texCoords.push((-Math.cos(i*angle)+1)/2,(Math.sin(i*angle)+1)/2);
         }
 
-        for (var i = 0; i < 11; i++) {
-            this.indices.push(0, (i+1), (i+2));
+        for(var i=0; i < this.slices-2;i++){
+            this.indices.push(0,i+1,i+2);
         }
-
-        this.indices.push(12, 1, 0);
 
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
