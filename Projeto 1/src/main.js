@@ -13,6 +13,7 @@ serialInclude([
 	'MyHalfSphere.js',
 	'MyTrap.js',
 	'MyLongTrap.js',
+	'MyLongTrapMirror.js',
 	'MyTractor.js',
 
 	main=function() {

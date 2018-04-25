@@ -147,7 +147,7 @@ class LightingScene extends CGFscene
 		this.popMatrix();
 
 		this.pushMatrix();
-		this.tractorBodyAppearance.apply();
+		//this.tractorBodyAppearance.apply();
 		this.tractor.display();
 		this.popMatrix();
 		// ---- END Scene drawing section
