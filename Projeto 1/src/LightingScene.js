@@ -50,13 +50,27 @@ class LightingScene extends CGFscene
 		
 		this.materialDefault = new CGFappearance(this);
 		
-		this.Light0=false; 
-		this.Light1=false;  
-		this.Light2=false; 
-		this.Light3=false; 
+		this.Light0=true; 
+		this.Light1=true;  
+		this.Light2=true; 
+		this.Light3=true; 
 		this.speed=3;
 		this.Axis=true;
-
+		this.LightGR=0.2;
+		this.LightGG=0.2;
+		this.LightGB=0.2;
+		this.Light0R=10;
+		this.Light0G=1;
+		this.Light0B=1;
+		this.Light1R=1;
+		this.Light1G=1;
+		this.Light1B=1;
+		this.Light2R=1;
+		this.Light2G=1;
+		this.Light2B=1;
+		this.Light3R=1;
+		this.Light3G=1;
+		this.Light3B=1;
 
 	};
 
@@ -67,7 +81,7 @@ class LightingScene extends CGFscene
 
 	initLights() 
 	{
-		this.setGlobalAmbientLight(0,0,0,1);
+		this.setGlobalAmbientLight(0.2,0.2,0.2,1);
 		//this.setGlobalAmbientLight(0,0,0,1);
 		// Positions for four lights
 		this.lights[0].setPosition(4, 4, 4, 1);
@@ -86,7 +100,7 @@ class LightingScene extends CGFscene
 
 		// Properties
 		this.lights[0].setAmbient(0, 0, 0, 1);
-		this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
+		this.lights[0].setDiffuse(1, 1, 1, 1);
 		this.lights[0].setSpecular(1,1,0,1);
 		this.lights[0].enable(this.Light0);
 
@@ -112,13 +126,17 @@ class LightingScene extends CGFscene
 
 	updateLights() 
 	{
-		this.lights[0].enable(this.Light0);
+		if(this.Light0 == true)	this.lights[0].enable(); 
+		else this.lights[0].disable();
 		this.lights[0].setVisible(this.Light0);
-		this.lights[1].enable(this.Light1);
+		if(this.Light1 == true)	this.lights[1].enable(); 
+		else this.lights[1].disable();
 		this.lights[1].setVisible(this.Light1);
-		this.lights[2].enable(this.Light2);
+		if(this.Light2 == true)	this.lights[2].enable(); 
+		else this.lights[2].disable();
 		this.lights[2].setVisible(this.Light2);
-		this.lights[3].enable(this.Light3);
+		if(this.Light3 == true)	this.lights[3].enable(); 
+		else this.lights[3].disable();
 		this.lights[3].setVisible(this.Light3);
 		for (var i = 0; i < this.lights.length; i++)
 			this.lights[i].update();
@@ -186,5 +204,6 @@ class LightingScene extends CGFscene
 	}
 
 	doSomething()
-	{ console.log("Doing something..."); };
+	{ console.log("Doing something...");
+	console.log(this.Light0R) };
 };
