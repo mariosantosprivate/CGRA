@@ -65,6 +65,7 @@ class MyInterface extends CGFinterface {
 
 		this.gui.add(this.scene, 'speed', -5, 5);
 		this.gui.add(this.scene, 'Axis');
+		this.gui.add(this.scene, 'skin', [ 'Red', 'Cow', 'Face' ] );
 		this.initKeys();
 		return true;
 	};

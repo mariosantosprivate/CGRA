@@ -57,6 +57,8 @@ class LightingScene extends CGFscene
 		this.speed=3;
 		this.Axis=true;
 
+		this.skin = new Array("Red", "Cow", "Face");
+
 	};
 
 	initCameras() 
@@ -205,6 +207,8 @@ class LightingScene extends CGFscene
 
 		if(this.deltaTime <= 1000)
 		this.plane.update(this.deltaTime);
+
+		
 
 	}
 

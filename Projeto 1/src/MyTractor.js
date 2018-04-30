@@ -27,6 +27,27 @@ class MyTractor extends CGFobject
 		this.bodyAppearance.setSpecular(0.8,0.8,0.8,1);	
 		this.bodyAppearance.setShininess(200);
 
+		this.bodyAppearanceRed = new CGFappearance(this.scene);
+        this.bodyAppearanceRed.loadTexture('../resources/images/tractorred.png');
+		this.bodyAppearanceRed.setAmbient(1,1,1,1);
+		this.bodyAppearanceRed.setDiffuse(0.6,0.6,0.6,1);
+		this.bodyAppearanceRed.setSpecular(0.8,0.8,0.8,1);	
+		this.bodyAppearanceRed.setShininess(200);
+
+		this.bodyAppearanceCow = new CGFappearance(this.scene);
+        this.bodyAppearanceCow.loadTexture('../resources/images/tractorcow.png');
+		this.bodyAppearanceCow.setAmbient(1,1,1,1);
+		this.bodyAppearanceCow.setDiffuse(0.6,0.6,0.6,1);
+		this.bodyAppearanceCow.setSpecular(0.8,0.8,0.8,1);	
+		this.bodyAppearanceCow.setShininess(200);
+
+		this.bodyAppearanceFace = new CGFappearance(this.scene);
+        this.bodyAppearanceFace.loadTexture('../resources/images/tractorface.png');
+		this.bodyAppearanceFace.setAmbient(1,1,1,1);
+		this.bodyAppearanceFace.setDiffuse(0.6,0.6,0.6,1);
+		this.bodyAppearanceFace.setSpecular(0.8,0.8,0.8,1);	
+		this.bodyAppearanceFace.setShininess(200);
+
         this.fenderAppearance = new CGFappearance(this.scene);
         this.fenderAppearance.loadTexture('../resources/images/tractor.png');
 
@@ -75,7 +96,7 @@ class MyTractor extends CGFobject
             this.scene.translate(0,0.5,0.01);
             this.scene.scale(2,1,0);
             this.scene.translate(0,0.9,0);
-            this.bodyAppearance.apply();
+            this.bodyAppearanceRed.apply();
             this.rightEngineBay.display();
             this.scene.popMatrix();
 
@@ -85,7 +106,7 @@ class MyTractor extends CGFobject
             this.scene.translate(0,0.5,2.0);
             this.scene.scale(2,1,0);
             this.scene.translate(0,0.9,0);
-            this.bodyAppearance.apply();
+            this.bodyAppearanceRed.apply();
             this.leftEngineBay.display();
             this.scene.popMatrix();
 
@@ -98,7 +119,7 @@ class MyTractor extends CGFobject
             this.scene.translate(-1,0.7,0);
             this.scene.scale(1,1.5,1);
             this.scene.translate(0,0.6,0);
-            this.bodyAppearance.apply();
+            this.bodyAppearanceRed.apply();
             this.side.display();
             this.scene.popMatrix();
 
@@ -108,7 +129,7 @@ class MyTractor extends CGFobject
             this.scene.translate(1,0.7,1.99);
             this.scene.scale(1,1.5,1);
             this.scene.translate(0,0.6,0);
-            this.bodyAppearance.apply();
+            this.bodyAppearanceRed.apply();
             this.side.display();
             this.scene.popMatrix();
 
@@ -137,7 +158,7 @@ class MyTractor extends CGFobject
         this.scene.translate(1,1,2.2);
         this.scene.scale(2.02,1.0,2.0);
         this.scene.translate(0,0,0.45);
-        this.bodyAppearance.apply();
+        this.bodyAppearanceRed.apply();
         this.front.display();
         this.scene.popMatrix();
 
@@ -149,7 +170,7 @@ class MyTractor extends CGFobject
         this.scene.translate(1.01,-0.55,1.3);
         this.scene.translate(0,0.15,0.9);
         this.scene.scale(2.01,2.5,2.0);
-        this.bodyAppearance.apply();
+        this.bodyAppearanceRed.apply();
         this.front.display();
         this.scene.popMatrix();
 
@@ -160,7 +181,7 @@ class MyTractor extends CGFobject
         this.scene.translate(-1,0.55, 1.925);
         this.scene.scale(2.02,2.3,2.0);
         this.scene.translate(0,0.45,0.1);
-        this.bodyAppearance.apply();
+        this.bodyAppearanceRed.apply();
         this.front.display();
         this.scene.popMatrix();
 
@@ -171,7 +192,7 @@ class MyTractor extends CGFobject
         this.scene.translate(1,1.75, -0.1);
         this.scene.scale(1.98,1.0,2.0);
         this.scene.translate(0,0.9,0.09);
-        this.bodyAppearance.apply();
+        this.bodyAppearanceRed.apply();
         this.front.display();
         this.scene.popMatrix();
         this.scene.pushMatrix();
