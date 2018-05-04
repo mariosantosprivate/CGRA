@@ -14,8 +14,10 @@ serialInclude([
 	'MyTrap.js',
 	'MyLongTrap.js',
 	'MyLongTrapMirror.js',
-	'MyTractor.js',
+	'MyVehicle.js',
 	'MyInterface.js',
+	'MyTerrain.js',
+	'Plane.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);

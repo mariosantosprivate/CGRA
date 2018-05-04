@@ -16,7 +16,7 @@ class LightingScene extends CGFscene
 
 		this.initLights();
 
-		this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
+		this.gl.clearColor(54.0/255, 81.0/255, 94.0/255, 1.0);
 		this.gl.clearDepth(100.0);
 		this.gl.enable(this.gl.DEPTH_TEST);
 		this.gl.enable(this.gl.CULL_FACE);
@@ -25,19 +25,19 @@ class LightingScene extends CGFscene
 		this.axis = new CGFaxis(this);
 
 		// Scene elements
-		this.terrain = new MyQuad(this,0,10,0,12);
+		this.terrain = new MyTerrain(this, 50 , 0, 1, 0, 1);
 		this.trap = new MyLongTrap(this, 0, 0, 0, 0);
-		this.tractor = new MyTractor(this);
+		this.tractor = new MyVehicle(this);
 		//Materials
 		/*Textures*/ 
 		
 		/*Material for the floor */
 		this.terrainAppearance = new CGFappearance(this);
 		this.terrainAppearance.loadTexture("../resources/images/terrain.png");
-		this.terrainAppearance.setAmbient(0.1,0.1,0.1,1);
-		this.terrainAppearance.setDiffuse(0.5,0.5,0.5,1);
-		this.terrainAppearance.setSpecular(0.7,0.7,0.7,1);
-		this.terrainAppearance.setShininess(120);
+		this.terrainAppearance.setAmbient(0.8,0.8,0.8,1);
+		this.terrainAppearance.setDiffuse(0.4,0.4,0.4,1);
+		this.terrainAppearance.setSpecular(0.1,0.1,0.1,1);
+		this.terrainAppearance.setShininess(0);
 
 		this.tractorBodyAppearance = new CGFappearance(this);
 		this.tractorBodyAppearance.loadTexture("../resources/images/tractor.png");
@@ -155,14 +155,15 @@ class LightingScene extends CGFscene
 		// ---- BEGIN Scene drawing section
 
 		// Terrain
-		this.pushMatrix();
-			this.translate(7.5, 0, 7.5);
-			this.rotate(-90 * degToRad, 1, 0, 0);
-			this.scale(30, 30, 0.2);
-			this.terrainAppearance.apply();
-			this.terrain.display();
+		this.pushMatrix();		
+		this.translate(7.5, 0, 7.5);
+		this.rotate(-90 * degToRad, 1, 0, 0);
+		this.scale(50, 50, 1);
+		this.terrainAppearance.apply();
+		this.terrain.display();
 		this.popMatrix();
 
+		// Vehicle
 		this.pushMatrix();
 		//this.tractorBodyAppearance.apply();
 		this.tractor.display();
