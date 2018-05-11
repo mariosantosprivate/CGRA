@@ -56,8 +56,21 @@ class LightingScene extends CGFscene
 		this.Light3=true; 
 		this.speed=3;
 		this.Axis=true;
-
-		this.skin = new Array("Red", "Cow", "Face");
+		this.LightGR=0.2;
+		this.LightGG=0.2;
+		this.LightGB=0.2;
+		this.Light0R=10;
+		this.Light0G=1;
+		this.Light0B=1;
+		this.Light1R=1;
+		this.Light1G=1;
+		this.Light1B=1;
+		this.Light2R=1;
+		this.Light2G=1;
+		this.Light2B=1;
+		this.Light3R=1;
+		this.Light3G=1;
+		this.Light3B=1;
 
 	};
 
@@ -129,25 +142,6 @@ class LightingScene extends CGFscene
 			this.lights[i].update();
 	}
 
-	checkKeys()
-	{
-		var text="Keys pressed: ";
-		var keysPressed=false;
-		if (this.gui.isKeyPressed("KeyW"))
-	{
-		text+=" W ";
-		keysPressed=true;
-	}
-	if (this.gui.isKeyPressed("KeyS"))
-	{
-		text+=" S ";
-		keysPressed=true;
-	}
-	if (keysPressed)
-		console.log(text);
-	}
-
-
 	display() 
 	{
 		// ---- BEGIN Background, camera and axis setup
@@ -165,7 +159,6 @@ class LightingScene extends CGFscene
 
 		// Update all lights used
 		this.updateLights();
-		this.checkKeys();
 
 		// Draw axis
 		if(this.Axis == true){
@@ -205,42 +198,14 @@ class LightingScene extends CGFscene
 
 		this.clock.update(this.deltaTime);
 
+		this.tractor.update(this.deltaTime);
+		
 		if(this.deltaTime <= 1000)
 		this.plane.update(this.deltaTime);
-
-		
 
 	}
 
 	doSomething()
 	{ console.log("Doing something...");
 	console.log(this.Light0R) };
-
-	checkKeys()
-	{
-		var text="Keys pressed: ";
-		var keysPressed=false;
-		if (this.gui.isKeyPressed("KeyW"))
-		{
-			text+=" W ";
-			keysPressed=true;
-			this.moveForward();
-		}
-		if (this.gui.isKeyPressed("KeyS"))
-		{
-			text+=" S ";
-			keysPressed=true;
-			this.moveBack();
-		}
-		if (keysPressed)
-		console.log(text);
-	}
-
-	moveForward(){
-		//this.tractor.translate(1,0,0,0);
-	}
-	moveBack(){
-		//this.tract.translate(-1,0,0,0);
-	}
-
 };
