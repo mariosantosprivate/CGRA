@@ -353,6 +353,10 @@ class MyTractor extends CGFobject
     };
 
     update(currTime) {
+    	let time = currTime/1000; //working with ms
+
+        let secAngle = (this.seconds.angle + time*360/60)%360;
+		this.tire.setAngle(this.tire.angle + (360/60.0)*(currTime/1000.0));
     }
 
 };
