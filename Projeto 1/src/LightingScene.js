@@ -25,7 +25,8 @@ class LightingScene extends CGFscene
 		this.axis = new CGFaxis(this);
 
 		// Scene elements
-		this.terrain = new MyTerrain(this, 50 , 0, 1, 0, 1);
+		this.ruler = new MyQuad(this, 0, 1, 0, 1);
+		this.terrain = new MyTerrain(this, 50 , 0, 5, 0, 5);
 		this.trap = new MyLongTrap(this, 0, 0, 0, 0);
 		this.tractor = new MyVehicle(this);
 		//Materials
@@ -50,27 +51,13 @@ class LightingScene extends CGFscene
 		
 		this.materialDefault = new CGFappearance(this);
 		
-		this.Light0=true; 
-		this.Light1=true;  
-		this.Light2=true; 
-		this.Light3=true; 
+		this.Light0=false; 
+		this.Light1=false;  
+		this.Light2=false; 
+		this.Light3=false; 
 		this.speed=3;
 		this.Axis=true;
-		this.LightGR=0.2;
-		this.LightGG=0.2;
-		this.LightGB=0.2;
-		this.Light0R=10;
-		this.Light0G=1;
-		this.Light0B=1;
-		this.Light1R=1;
-		this.Light1G=1;
-		this.Light1B=1;
-		this.Light2R=1;
-		this.Light2G=1;
-		this.Light2B=1;
-		this.Light3R=1;
-		this.Light3G=1;
-		this.Light3B=1;
+
 
 	};
 
@@ -81,7 +68,7 @@ class LightingScene extends CGFscene
 
 	initLights() 
 	{
-		this.setGlobalAmbientLight(0.2,0.2,0.2,1);
+		this.setGlobalAmbientLight(0,0,0,1);
 		//this.setGlobalAmbientLight(0,0,0,1);
 		// Positions for four lights
 		this.lights[0].setPosition(4, 4, 4, 1);
@@ -100,7 +87,7 @@ class LightingScene extends CGFscene
 
 		// Properties
 		this.lights[0].setAmbient(0, 0, 0, 1);
-		this.lights[0].setDiffuse(1, 1, 1, 1);
+		this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
 		this.lights[0].setSpecular(1,1,0,1);
 		this.lights[0].enable(this.Light0);
 
@@ -126,17 +113,13 @@ class LightingScene extends CGFscene
 
 	updateLights() 
 	{
-		if(this.Light0 == true)	this.lights[0].enable(); 
-		else this.lights[0].disable();
+		this.lights[0].enable(this.Light0);
 		this.lights[0].setVisible(this.Light0);
-		if(this.Light1 == true)	this.lights[1].enable(); 
-		else this.lights[1].disable();
+		this.lights[1].enable(this.Light1);
 		this.lights[1].setVisible(this.Light1);
-		if(this.Light2 == true)	this.lights[2].enable(); 
-		else this.lights[2].disable();
+		this.lights[2].enable(this.Light2);
 		this.lights[2].setVisible(this.Light2);
-		if(this.Light3 == true)	this.lights[3].enable(); 
-		else this.lights[3].disable();
+		this.lights[3].enable(this.Light3);
 		this.lights[3].setVisible(this.Light3);
 		for (var i = 0; i < this.lights.length; i++)
 			this.lights[i].update();
@@ -172,17 +155,26 @@ class LightingScene extends CGFscene
 
 		// ---- BEGIN Scene drawing section
 
+		// Ruler (to measure tractor)
+		this.pushMatrix();
+		this.rotate(-90 * degToRad, 0, 1, 0);
+		this.scale(1,2,1);
+		this.translate(0,1,0);
+
+		this.ruler.display();
+		this.popMatrix();
 		// Terrain
 		this.pushMatrix();		
 		this.translate(7.5, 0, 7.5);
 		this.rotate(-90 * degToRad, 1, 0, 0);
-		this.scale(50, 50, 1);
+		this.scale(500, 500, 1);
 		this.terrainAppearance.apply();
 		this.terrain.display();
 		this.popMatrix();
 
 		// Vehicle
 		this.pushMatrix();
+		this.scale(1.2,1.2,1);
 		//this.tractorBodyAppearance.apply();
 		this.tractor.display();
 		this.popMatrix();
@@ -199,14 +191,11 @@ class LightingScene extends CGFscene
 
 		this.clock.update(this.deltaTime);
 
-		this.tractor.update(this.deltaTime);
-		
 		if(this.deltaTime <= 1000)
 		this.plane.update(this.deltaTime);
 
 	}
 
 	doSomething()
-	{ console.log("Doing something...");
-	console.log(this.Light0R) };
+	{ console.log("Doing something..."); };
 };

@@ -31,7 +31,7 @@ class MyVehicle extends CGFobject
         this.fenderAppearance.loadTexture('../resources/images/tractor.png');
 
         this.tireAppearance = new CGFappearance(this.scene);
-        this.tireAppearance.loadTexture('../resources/images/tire.png');
+        this.tireAppearance.loadTexture('../resources/images/tire2.png');
 
         this.wheelAppearance = new CGFappearance(this.scene);
         this.wheelAppearance.loadTexture('../resources/images/wheel.png');
