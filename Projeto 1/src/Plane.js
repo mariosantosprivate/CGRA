@@ -10,13 +10,12 @@ class Plane extends CGFobject{
 		this.nrDivs = nrDivs;
 		this.patchLength = 1.0 / nrDivs;
 		
-		this.minS=minS || 0;
-		this.maxS=maxS || 1;
-		this.minT=minT || 0;
-		this.maxT=maxT || 1;
+		this.minS = minS || 0;
+		this.maxS = maxS || 1;
+		this.minT = minT || 0;
+		this.maxT = maxT || 1;
 
 		this.altimetry = altimetry;
-
 
 		this.initBuffers(this.altimetry);
 	};
@@ -43,7 +42,7 @@ class Plane extends CGFobject{
 			var xCoord = -0.5;
 			for (var i = 0; i <= this.nrDivs; i++) 
 			{
-				this.vertices.push(xCoord, yCoord, 0);
+				this.vertices.push(xCoord, yCoord, this.altimetry[i][j]);
 				
 				// As this plane is being drawn on the xy plane, the normal to the plane will be along the positive z axis.
 				// So all the vertices will have the same normal, (0, 0, 1).

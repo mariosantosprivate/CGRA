@@ -1,15 +1,15 @@
 class MyTerrain extends CGFobject{
 
-	constructor(scene, nrDivs, altimetry, minS, maxS, minT, maxT) 
+	constructor(scene, nrDivs, altimetry) 
 	{
         super(scene);
         
-        this.minS = minS || 0;
-        this.minS = maxS || 1;
-        this.minS = minT || 0;
-        this.minS = maxT || 1;
-
-		this.terrain = new Plane(this.scene,nrDivs,altimetry, minS, maxS, minT, maxT);
+		this.nrDivs = nrDivs;
+		this.minS = 0;
+		this.maxS = 1;
+		this.minT = 0;
+		this.maxT = 1;
+		this.terrain = new Plane(this.scene, this.nrDivs, altimetry, this.minS, this.maxS, this.minT, this.maxT);
         
 
 
@@ -27,7 +27,7 @@ class MyTerrain extends CGFobject{
 		this.scene.pushMatrix();		
 		this.scene.translate(7.5, 0, 7.5);
 		this.scene.rotate(-90 * degToRad, 1, 0, 0);
-        this.scene.scale(50, 50, 1);
+        this.scene.scale(100, 100, 1);
         this.terrainAppearance.apply();
         this.terrain.display();
 		this.scene.popMatrix();

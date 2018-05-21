@@ -1,11 +1,6 @@
 var degToRad = Math.PI / 180.0;
 
 
-
-var globalVariable={
-       globalTex: 'Red'
-    };
-
 class LightingScene extends CGFscene 
 {
 	constructor()
@@ -33,26 +28,26 @@ class LightingScene extends CGFscene
 		this.Light1=false;  
 		this.Light2=false; 
 		this.Light3=false; 
-		this.texture='Red'; 
+
 		this.speed=3;
 		
 		this.Axis=true;
 
-		this.altimetry= [[ 2.0 , 3.0 , 2.0, 4.0, 2.5, 2.4, 2.3, 1.3, 1.0 ],
-						[ 2.0 , 3.0 , 2.0, 4.0, 7.5, 6.4, 4.3, 1.3, 1.0],
-						[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-						[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-						[ 0.0 , 0.0 , 2.0, 4.0, 2.5, 2.4, 0.0, 0.0, 0.0],
-						[ 0.0 , 0.0 , 2.0, 4.0, 3.5, 2.4, 0.0, 0.0, 0.0],
-						[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-						[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
-						[ 2.0 , 3.0 , 2.0, 1.0, 2.5, 2.4, 2.3, 1.3, 0.0]
+		this.altimetry= [[ 13.5 , 11.0 , 12.0, 13.0, 12.5, 14.5, 12.3, 11.3],
+						[ 12.5 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 11.3],
+						[ 12.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 12.0],
+						[ 14.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 13.0],
+						[ 11.5 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 15.0],
+						[ 13.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 13.0],
+						[ 11.5 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 12.0],
+						[ 12.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 11.0],
+						[ 11.0 , 10.0 , 10.0, 11.0, 12.5, 12.4, 12.3, 10.3]
 						];
 
 		// Scene elements
 		this.ruler = 
 		new MyQuad(this, 0, 1, 0, 1);
-		this.terrain = new MyTerrain(this, 9 , this.altimetry);
+		this.terrain = new MyTerrain(this, 8 , this.altimetry);
 		this.trap = new MyLongTrap(this, 0, 0, 0, 0);
 		this.tractor = new MyVehicle(this);
 		
@@ -175,8 +170,6 @@ class LightingScene extends CGFscene
 	{
 		// ---- BEGIN Background, camera and axis setup
 
-		globalVariable.globalTex=this.texture;
-		//console.log(globalVariable.globalTex);
 		// Clear image and depth buffer everytime we update the scene
 		this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
 		this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
@@ -219,6 +212,7 @@ class LightingScene extends CGFscene
 
 		// Vehicle
 		this.pushMatrix();
+		this.translate(-5,0,-10);
 		this.tractor.display();
 		this.popMatrix();
 		// ---- END Scene drawing section
