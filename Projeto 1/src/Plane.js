@@ -1,6 +1,6 @@
 class Plane extends CGFobject{
 
-	constructor(scene, nrDivs, minS, maxS, minT, maxT) 
+	constructor(scene, nrDivs, altimetry, minS, maxS, minT, maxT) 
 	{
 		super(scene);
 
@@ -9,15 +9,19 @@ class Plane extends CGFobject{
 
 		this.nrDivs = nrDivs;
 		this.patchLength = 1.0 / nrDivs;
-		this.minS=minS;
-		this.maxS=maxS;
-		this.minT=minT;
-		this.maxT=maxT;
+		
+		this.minS=minS || 0;
+		this.maxS=maxS || 1;
+		this.minT=minT || 0;
+		this.maxT=maxT || 1;
 
-		this.initBuffers();
+		this.altimetry = altimetry;
+
+
+		this.initBuffers(this.altimetry);
 	};
 
-	initBuffers()
+	initBuffers(altimetry)
 	{
 		
 		// Generate vertices and normals 
@@ -27,6 +31,8 @@ class Plane extends CGFobject{
 		// Uncomment below to init texCoords
 		this.texCoords = [];
 
+		this.altimetry = altimetry;
+		
 		var step_t = (this.maxT - this.minT)/this.nrDivs;
 		var step_s = (this.maxS - this.minS)/this.nrDivs;
 
@@ -45,7 +51,7 @@ class Plane extends CGFobject{
 				this.normals.push(0,0,1);
 
 				// texCoords should be computed here; uncomment and fill the blanks
-				this.texCoords.push(i*step_s, j*step_t);
+				this.texCoords.push(this.minS+i*step_s, this.minT + j*step_t);
 
 				xCoord += this.patchLength;
 			}
@@ -79,16 +85,5 @@ class Plane extends CGFobject{
 
 		this.initGLBuffers();
 	};
-
-};
-
-class MyTerrain extends Plane{
-
-	constructor(scene, nrDivs, minS, maxS, minT, maxT) 
-	{
-		super(scene, nrDivs,minS, maxS, minT, maxT);
-        this.initBuffers();
-	};
-    
 
 };

@@ -9,17 +9,24 @@ class MyInterface extends CGFinterface {
  	constructor () {
  		super();
  	}
-	
-	/**
-	 * init
-	 * @param {CGFapplication} application
-	 */
-	init(application) {
-		// call CGFinterface init
-		super.init(application);
+	 initKeys() {
+		this.scene.gui=this;
+		this.processKeyboard=function(){};
+		this.activeKeys={};
+		}
+		processKeyDown(event) {
+			this.activeKeys[event.code]=true;
+		};
+		processKeyUp(event) {
+			this.activeKeys[event.code]=false;
+		};
+		isKeyPressed(keyCode) {
+			return this.activeKeys[keyCode] || false;
+		};
 
-		// init GUI. For more information on the methods, check:
-		//  http://workshop.chromeexperiments.com/examples/gui
+
+	init(application) {
+		super.init(application);
 
 		this.gui = new dat.GUI();
 
@@ -29,8 +36,6 @@ class MyInterface extends CGFinterface {
 		// e.g. LightingScene.prototype.doSomething = function () { console.log("Doing something..."); }; 
 
 		this.gui.add(this.scene, 'doSomething');	
-
-		// add a group of controls (and open/expand by defult)
 
 		var Lgroup=this.gui.addFolder("Lights");
 		//Lgroup.open();
@@ -50,25 +55,9 @@ class MyInterface extends CGFinterface {
 
 		this.gui.add(this.scene, 'speed', -5, 5);
 		this.gui.add(this.scene, 'Axis');
+		this.initKeys();
 		return true;
-	};
+	}
+}
 
-	/**
-	 * processKeyboard
-	 * @param event {Event}
-	 */
-	processKeyboard(event) {
-		// call CGFinterface default code (omit if you want to override)
-		super.processKeyboard(event);
 
-		// Check key codes e.g. here: http://www.asciitable.com/
-		// or use String.fromCharCode(event.keyCode) to compare chars
-
-		// for better cross-browser support, you may also check suggestions on using event.which in http://www.w3schools.com/jsref/event_key_keycode.asp
-		switch (event.keyCode)
-		{
-			case (65):	// only works for capital 'A', as it is
-				console.log("Key 'A' pressed");
-		};
-	};
-};

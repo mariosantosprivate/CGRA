@@ -24,21 +24,36 @@ class LightingScene extends CGFscene
 
 		this.axis = new CGFaxis(this);
 
+		this.Light0=false; 
+		this.Light1=false;  
+		this.Light2=false; 
+		this.Light3=false; 
+
+		this.speed=3;
+		
+		this.Axis=true;
+
+		this.altimetry= [[ 2.0 , 3.0 , 2.0, 4.0, 2.5, 2.4, 2.3, 1.3, 1.0 ],
+						[ 2.0 , 3.0 , 2.0, 4.0, 7.5, 6.4, 4.3, 1.3, 1.0],
+						[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+						[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+						[ 0.0 , 0.0 , 2.0, 4.0, 2.5, 2.4, 0.0, 0.0, 0.0],
+						[ 0.0 , 0.0 , 2.0, 4.0, 3.5, 2.4, 0.0, 0.0, 0.0],
+						[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+						[ 0.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+						[ 2.0 , 3.0 , 2.0, 1.0, 2.5, 2.4, 2.3, 1.3, 0.0]
+						];
+
 		// Scene elements
-		this.ruler = new MyQuad(this, 0, 1, 0, 1);
-		this.terrain = new MyTerrain(this, 50 , 0, 5, 0, 5);
+		this.ruler = 
+		new MyQuad(this, 0, 1, 0, 1);
+		this.terrain = new MyTerrain(this, 9 , this.altimetry);
 		this.trap = new MyLongTrap(this, 0, 0, 0, 0);
 		this.tractor = new MyVehicle(this);
-		//Materials
-		/*Textures*/ 
 		
-		/*Material for the floor */
-		this.terrainAppearance = new CGFappearance(this);
-		this.terrainAppearance.loadTexture("../resources/images/terrain.png");
-		this.terrainAppearance.setAmbient(0.8,0.8,0.8,1);
-		this.terrainAppearance.setDiffuse(0.4,0.4,0.4,1);
-		this.terrainAppearance.setSpecular(0.1,0.1,0.1,1);
-		this.terrainAppearance.setShininess(0);
+		
+		//Materials
+		this.materialDefault = new CGFappearance(this);
 
 		this.tractorBodyAppearance = new CGFappearance(this);
 		this.tractorBodyAppearance.loadTexture("../resources/images/tractor.png");
@@ -49,16 +64,12 @@ class LightingScene extends CGFscene
 
 		this.enableTextures(true);
 		
-		this.materialDefault = new CGFappearance(this);
 		
-		this.Light0=false; 
-		this.Light1=false;  
-		this.Light2=false; 
-		this.Light3=false; 
-		this.speed=3;
-		this.Axis=true;
+		
+		
 
 
+		this.setUpdatePeriod(100);
 	};
 
 	initCameras() 
@@ -68,9 +79,10 @@ class LightingScene extends CGFscene
 
 	initLights() 
 	{
-		this.setGlobalAmbientLight(0,0,0,1);
-		//this.setGlobalAmbientLight(0,0,0,1);
-		// Positions for four lights
+		this.setGlobalAmbientLight(0.5,0.5,0.5,1);
+
+		// Lights positions
+
 		this.lights[0].setPosition(4, 4, 4, 1);
 		this.lights[0].setVisible(true); // show marker on light position (different from enabled)
 
@@ -86,6 +98,7 @@ class LightingScene extends CGFscene
 		this.lights[3].setVisible(true);
 
 		// Properties
+		
 		this.lights[0].setAmbient(0, 0, 0, 1);
 		this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
 		this.lights[0].setSpecular(1,1,0,1);
@@ -124,6 +137,34 @@ class LightingScene extends CGFscene
 		for (var i = 0; i < this.lights.length; i++)
 			this.lights[i].update();
 	}
+	checkKeys() {
+        var text="Keys pressed: ";
+        var keysPressed=false;
+
+        if (this.gui.isKeyPressed("KeyW")) {
+            text+=" W ";
+            keysPressed=true;
+		}
+		
+		if (this.gui.isKeyPressed("KeyA")) {
+            text+=" A ";
+            keysPressed=true;
+        }
+
+        if (this.gui.isKeyPressed("KeyS")) {
+            text+=" S ";
+            keysPressed=true;
+        }
+
+        if (this.gui.isKeyPressed("KeyD")) {
+            text+=" D ";
+            keysPressed=true;
+        }
+
+        if (keysPressed) {
+            console.log(text);
+        }
+    }
 
 	display() 
 	{
@@ -147,7 +188,7 @@ class LightingScene extends CGFscene
 		if(this.Axis == true){
 			this.axis.display();
 		}
-		
+		this.checkKeys();
 
 		this.materialDefault.apply();
 
@@ -155,46 +196,26 @@ class LightingScene extends CGFscene
 
 		// ---- BEGIN Scene drawing section
 
-		// Ruler (to measure tractor)
+		/*// Ruler (to measure tractor)
 		this.pushMatrix();
 		this.rotate(-90 * degToRad, 0, 1, 0);
 		this.scale(1,2,1);
 		this.translate(0,1,0);
-
 		this.ruler.display();
-		this.popMatrix();
+		this.popMatrix();*/
+		
+		
 		// Terrain
-		this.pushMatrix();		
-		this.translate(7.5, 0, 7.5);
-		this.rotate(-90 * degToRad, 1, 0, 0);
-		this.scale(500, 500, 1);
-		this.terrainAppearance.apply();
+		this.pushMatrix();
 		this.terrain.display();
 		this.popMatrix();
 
 		// Vehicle
 		this.pushMatrix();
-		this.scale(1.2,1.2,1);
-		//this.tractorBodyAppearance.apply();
 		this.tractor.display();
 		this.popMatrix();
 		// ---- END Scene drawing section
 	};
-
-	update(currTime)
-	{
-		this.lastTime = this.lastTime || 0;
-
-		this.deltaTime = currTime - this.lastTime;
-
-		this.lastTime = currTime;
-
-		this.clock.update(this.deltaTime);
-
-		if(this.deltaTime <= 1000)
-		this.plane.update(this.deltaTime);
-
-	}
 
 	doSomething()
 	{ console.log("Doing something..."); };

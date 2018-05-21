@@ -5,11 +5,13 @@ var degToRad = Math.PI / 180.0;
 
 class MyVehicle extends CGFobject
 {
-    constructor(scene)
+    constructor(scene, x, y, z)
     {
         super(scene);
 
-        this.materialDefault = new CGFappearance(this.scene);
+        this.x = x || 0;
+        this.y = y || 0;
+        this.z = z || 0;
 
         this.leftEngineBay = new MyLongTrap(this.scene);
         this.rightEngineBay = new MyLongTrapMirror(this.scene);
@@ -17,9 +19,12 @@ class MyVehicle extends CGFobject
         this.front = new MyQuad(this.scene);
         this.light = new MyHalfSphere(this.scene, 100, 100);
         this.sideWindow = new MyQuad(this.scene);
-        this.tire = new MyCylinder(this.scene, 100 ,100);
-        this.wheel = new MyCircle(this.scene,100);
+        this.wheels = new MyWheel(this.scene);
+        
+        // Materials
 
+        this.materialDefault = new CGFappearance(this.scene);
+        
         this.bodyAppearance = new CGFappearance(this.scene);
         this.bodyAppearance.loadTexture('../resources/images/tractor.png');
 		this.bodyAppearance.setAmbient(1,1,1,1);
@@ -52,17 +57,11 @@ class MyVehicle extends CGFobject
 		this.hoodAppearance.setSpecular(0.8,0.8,0.8,1);	
         this.hoodAppearance.setShininess(200);
         
-        
-
-
         this.lightAppearance = new CGFappearance(this.scene);
 		this.lightAppearance.setAmbient(0.9,0.9,0.5,1);
 		this.lightAppearance.setDiffuse(0.9,0.9,0.5,1);
 		this.lightAppearance.setSpecular(0.9,0.9,0.5,1);	
         this.lightAppearance.setShininess(200);
-        
-
-    
     };
 
     display()
@@ -240,101 +239,9 @@ class MyVehicle extends CGFobject
         this.light.display();
         this.scene.popMatrix();
 
-        //Back Wheels
-
-            // Left
-            this.scene.pushMatrix();
-            this.scene.scale(1,1,0.9);
-            this.scene.translate(1,1.2,2.2);
-            this.tireAppearance.apply();
-            this.tire.display();
-            this.scene.popMatrix();
-
-            this.scene.pushMatrix();
-            this.scene.scale(1,1,0.9);
-            this.scene.translate(1,1.2,2.2);
-            this.scene.rotate(degToRad*180,1,0,0);
-            this.wheelAppearance.apply();
-            this.wheel.display();
-            this.scene.popMatrix();
-
-            this.scene.pushMatrix();
-            this.scene.scale(1,1,1.08);
-            this.scene.translate(1,1.2,2.65);
-            this.wheelAppearance.apply();
-            this.wheel.display();
-            this.scene.popMatrix();
-           
-            // Right
-            this.scene.pushMatrix();
-            this.scene.scale(1,1,0.9);
-            this.scene.translate(1,1.2,-1);
-            this.tireAppearance.apply();
-            this.tire.display();
-            this.scene.popMatrix();
-
-            this.scene.pushMatrix();
-            this.scene.scale(1,1,1);
-            this.scene.translate(1,1.2,-0.9);
-            this.scene.rotate(degToRad*180,1,0,0);
-            this.wheelAppearance.apply();
-            this.wheel.display();
-            this.scene.popMatrix();
-
-            this.scene.pushMatrix();
-            this.scene.scale(1,1,1);
-            this.scene.translate(1,1.2,0);
-            this.wheelAppearance.apply();
-            this.wheel.display();
-            this.scene.popMatrix();
-
-        //Front Tires
-            // Left
-            this.scene.pushMatrix();
-            this.scene.scale(0.7,0.7,0.7);
-            this.scene.translate(-1.7,1.3,2.9);
-            this.tireAppearance.apply();
-            this.tire.display();
-            this.scene.popMatrix();
-
-            this.scene.pushMatrix();
-            this.scene.scale(0.7,0.7,0.5);
-            this.scene.translate(-1.7,1.3,5.45);
-            this.wheelAppearance.apply();
-            this.wheel.display();
-            this.scene.popMatrix();
-
-            this.scene.pushMatrix();
-            this.scene.scale(0.7,0.7,0.5);
-            this.scene.translate(-1.7,1.3,4);
-            this.scene.rotate(degToRad*180,1,0,0);
-            this.wheelAppearance.apply();
-            this.wheel.display();
-            this.scene.popMatrix();
-
-            // Right
-            this.scene.pushMatrix();
-            this.scene.scale(0.7,0.7,0.7);
-            this.scene.translate(-1.7,1.3,-1);
-            this.tireAppearance.apply();
-            this.tire.display();
-            this.scene.popMatrix();
-
-            this.scene.pushMatrix();
-            this.scene.scale(0.7,0.7,0.7);
-            this.scene.translate(-1.7,1.3,0);
-            this.wheelAppearance.apply();
-            this.wheel.display();
-            this.scene.popMatrix();
-
-            this.scene.pushMatrix();
-            this.scene.scale(0.7,0.7,0.7);
-            this.scene.translate(-1.7,1.3,-1);
-            this.scene.rotate(degToRad*180,1,0,0);
-            this.wheelAppearance.apply();
-            this.wheel.display();
-            this.scene.popMatrix();
-            
+        this.scene.pushMatrix();
+        this.wheels.display();
+        this.scene.popMatrix();            
 
             //Bottom
             this.scene.pushMatrix();
@@ -346,13 +253,19 @@ class MyVehicle extends CGFobject
             this.front.display();
             this.scene.popMatrix();
 
-
+    //General
+    this.scene.pushMatrix();
+    this.scene.scale(1.2,1.2,1);
+    this.scene.translate(this.x, this.y, this.z);
+    this.scene.popMatrix();
 
 
 
     };
 
-    update(currTime) {
-    }
+    updateWheels(currTime)
+	{
+		this.wheels.setAngle(this.wheels.angle + (360/60.0)*(currTime/100.0));
+    };
 
 };

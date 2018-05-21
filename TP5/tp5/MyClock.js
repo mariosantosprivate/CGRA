@@ -13,7 +13,7 @@ class MyClock extends CGFobject
 
         this.clockFace = new MyCircle(this.scene);
 		this.clockBody = new MyCylinder(this.scene);
-		this.hourHand = new MyClockHand(this.scene, 0.03, 90);
+		this.hourHand = new fMyClockHand(this.scene, 0.03, 90);
         this.minHand = new MyClockHand(this.scene, 0.055, 180);
         this.secHand = new MyClockHand(this.scene, 0.05, 270);
 
@@ -49,20 +49,6 @@ class MyClock extends CGFobject
         this.scene.popMatrix();
 
     };
-
-    update(currTime) {
-
-        let time = currTime/1000; //working with ms
-
-        let secAngle = (this.seconds.angle + time*360/60)%360;
-        let minAngle = (this.minutes.angle + time*360/60/60)%360;
-        let hourAngle = (this.hours.angle + time*360/60/60/12)%360;
-
-        this.seconds.setAngle(secAngle);
-        this.minutes.setAngle(minAngle);
-        this.hours.setAngle(hourAngle);
-
-    }
 
     update(currTime)
 	{
