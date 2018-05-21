@@ -18,8 +18,8 @@ class MyTerrain extends CGFobject{
 
 		this.terrainAppearance = new CGFappearance(this.scene);
 		this.terrainAppearance.loadTexture("../resources/images/terrain.png");
-		this.terrainAppearance.setAmbient(0.8,0.8,0.8,1);
-		this.terrainAppearance.setDiffuse(0.4,0.4,0.4,1);
+		this.terrainAppearance.setAmbient(0,0,0,1);
+		this.terrainAppearance.setDiffuse(0.9,0.9,0.4,1);
 		this.terrainAppearance.setSpecular(0.1,0.1,0.1,1);
 		this.terrainAppearance.setShininess(0);
 	}

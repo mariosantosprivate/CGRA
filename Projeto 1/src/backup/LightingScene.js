@@ -1,8 +1,5 @@
 var degToRad = Math.PI / 180.0;
 
-var globalVariable ={
-	globalTex: 'Red'
-}
 
 class LightingScene extends CGFscene 
 {
@@ -35,8 +32,6 @@ class LightingScene extends CGFscene
 		this.speed=3;
 		
 		this.Axis=true;
-		
-		this.texture='Red'; 
 
 		this.altimetry= [[ 13.0 , 15.0 , 12.0, 11.0, 12.0, 13.0, 12.0, 13.0],
 						[ 14.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 13.0],
@@ -161,7 +156,6 @@ class LightingScene extends CGFscene
 	display() 
 	{
 		// ---- BEGIN Background, camera and axis setup
-		globalVariable.globalTex=this.texture;
 
 		// Clear image and depth buffer everytime we update the scene
 		this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
@@ -197,7 +191,7 @@ class LightingScene extends CGFscene
 		this.ruler.display();
 		this.popMatrix();*/
 		
-
+		
 		// Terrain
 		this.pushMatrix();
 		this.terrain.display();
@@ -208,7 +202,6 @@ class LightingScene extends CGFscene
 		this.tractor.display();
 		this.popMatrix();
 		// ---- END Scene drawing section
-	//this.tractor.updateWheels(currTime);
 	};
 
 	doSomething()
