@@ -3,8 +3,8 @@ class MyWheel extends CGFobject
 	constructor(scene, angle){
         
 		super(scene);
-		this.angle = angle || 90;
-		this.rot = 0;
+        this.rotationAngle = 0;
+        this.angle = angle || 90;
         this.tire = new MyCylinder(this.scene, 100 ,100);
         this.wheel = new MyCircle(this.scene,100);
     
@@ -18,18 +18,21 @@ class MyWheel extends CGFobject
 
 	setAngle(angle){
 	    this.angle = angle;
-	}
-	setRot(rot){
-		this.rot = rot;
-	}
-	resetRot(){
-		this.rot = 0;
-	}
+    }
+    
+    setRotation(rotationAngle){
+        this.rotationAngle = rotationAngle;
+    }
+
+    addRotation(rotationAngle){
+        this.rotationAngle += rotationAngle;
+    }
 
 	display()
 	{
 	    var degToRad = Math.PI / 180.0;
          //Back Wheels
+         //this.scene.rotate(this.rotationAngle);
 
             // Left
 
@@ -37,14 +40,14 @@ class MyWheel extends CGFobject
             this.scene.scale(1,1,0.9);
             this.scene.translate(1,1.2,2.2);
             this.tireAppearance.apply();
-            this.scene.rotate(this.angle * degToRad,0,this.rot * degToRad,1);
+            this.scene.rotate(this.angle * degToRad,0,0,1);
             this.tire.display();
             this.scene.popMatrix();
 
             this.scene.pushMatrix();
             this.scene.scale(1,1,0.9);
             this.scene.translate(1,1.2,2.2);
-            this.scene.rotate(this.angle * degToRad,0,this.rot * degToRad,1);
+            this.scene.rotate(this.angle * degToRad,0,0,1);
             this.scene.rotate(degToRad*180,1,0,0);
             this.wheelAppearance.apply();
             
@@ -53,92 +56,10 @@ class MyWheel extends CGFobject
 
             this.scene.pushMatrix();
             this.scene.scale(1,1,1.08);
-            
             this.scene.translate(1,1.2,2.65);
             this.wheelAppearance.apply();
-            this.scene.rotate(this.angle * degToRad,0,-this.rot * degToRad,1);
-            this.wheel.display();
-            this.scene.popMatrix();
-           
-            /*// Right
-            this.scene.pushMatrix();
-            this.scene.scale(1,1,0.9);
-            this.scene.translate(1,1.2,-1);
-            this.tireAppearance.apply();
-            this.scene.rotate(this.angle * degToRad,0,0,1);;
-            this.tire.display();
-            this.scene.popMatrix();
-
-            this.scene.pushMatrix();
-            this.scene.scale(1,1,1);
-            this.scene.translate(1,1.2,-0.9);
-            this.scene.rotate(degToRad*180,1,0,0);
-            this.wheelAppearance.apply();
             this.scene.rotate(this.angle * degToRad,0,0,1);;
             this.wheel.display();
             this.scene.popMatrix();
-
-            this.scene.pushMatrix();
-            this.scene.scale(1,1,1);
-            this.scene.translate(1,1.2,0);
-            this.wheelAppearance.apply();
-            this.scene.rotate(this.angle * degToRad,0,0,1);;
-            this.wheel.display();
-            this.scene.popMatrix();
-
-        //Front Tires
-            // Left
-            this.scene.pushMatrix();
-            this.scene.scale(0.7,0.7,0.7);
-            this.scene.translate(-1.7,1.3,2.9);
-            this.tireAppearance.apply();
-            this.scene.rotate(this.angle * degToRad,0,0,1);;
-            this.tire.display();
-            this.scene.popMatrix();
-
-            this.scene.pushMatrix();
-            this.scene.scale(0.7,0.7,0.5);
-            this.scene.translate(-1.7,1.3,5.45);
-            this.wheelAppearance.apply();
-            this.scene.rotate(this.angle * degToRad,0,0,1);;
-            this.wheel.display();
-            this.scene.popMatrix();
-
-            this.scene.pushMatrix();
-            this.scene.scale(0.7,0.7,0.5);
-            this.scene.translate(-1.7,1.3,4);
-            this.scene.rotate(degToRad*180,1,0,0);
-            this.wheelAppearance.apply();
-            this.scene.rotate(this.angle * degToRad,0,0,1);;
-            this.wheel.display();
-            this.scene.popMatrix();
-
-            // Right
-            this.scene.pushMatrix();
-            this.scene.scale(0.7,0.7,0.7);
-            this.scene.translate(-1.7,1.3,-1);
-            this.tireAppearance.apply();
-            this.scene.rotate(this.angle * degToRad,0,0,1);;
-            this.tire.display();
-            this.scene.popMatrix();
-
-            this.scene.pushMatrix();
-            this.scene.scale(0.7,0.7,0.7);
-            this.scene.translate(-1.7,1.3,0);
-            this.wheelAppearance.apply();
-            this.scene.rotate(this.angle * degToRad,0,0,1);;
-            this.wheel.display();
-            this.scene.popMatrix();
-
-            this.scene.pushMatrix();
-            this.scene.scale(0.7,0.7,0.7);
-            this.scene.translate(-1.7,1.3,-1);
-            this.scene.rotate(degToRad*180,1,0,0);
-            this.wheelAppearance.apply();
-            this.scene.rotate(this.angle * degToRad,0,0,1);;
-            this.wheel.display();
-            this.scene.popMatrix();
-        
-        */
 	}
 };

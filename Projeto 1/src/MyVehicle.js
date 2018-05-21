@@ -2,6 +2,7 @@
 * MyTractor
 */
 var degToRad = Math.PI / 180.0;
+var moving = 0;
 
 class MyVehicle extends CGFobject
 {
@@ -12,7 +13,7 @@ class MyVehicle extends CGFobject
         this.x = x || 0;
         this.y = y || 0;
         this.z = z || 0;
-
+        this.tractorAngle = 0.0;
         this.leftEngineBay = new MyLongTrap(this.scene);
         this.rightEngineBay = new MyLongTrapMirror(this.scene);
         this.side = new MyTrap(this.scene);
@@ -145,6 +146,9 @@ updateLights()
 
     display()
     {
+
+        this.scene.translate(this.x, this.y, this.z);
+        this.scene.rotate(-this.tractorAngle, 0, 1, 0);
         //Engine Bay
            
             this.texhere = globalVariable.globalTex;
@@ -343,11 +347,12 @@ updateLights()
 
         // Left Back Wheel
         this.scene.pushMatrix();
+        this.scene.translate(0,-0.1,0);
         this.backWheels.display();
         this.scene.popMatrix();
         // Right Back Wheel
         this.scene.pushMatrix();
-        this.scene.translate(0,0,-2.9);
+        this.scene.translate(0,-0.1,-2.9);
         this.backWheels.display();
         this.scene.popMatrix(); 
         
@@ -379,30 +384,80 @@ updateLights()
             this.scene.popMatrix();
 
     //General
+
     this.scene.pushMatrix();
     this.scene.scale(1.2,1.2,1);
-    this.scene.translate(this.x, this.y, this.z);
     this.scene.popMatrix();
 
 
 
     };
 
+    move(dx, dz){
+
+            this.x += dx;
+        
+    
+
+            this.z += dz;
+        
+    }
+
+    moveForward(speed)
+    {
+        if(this.tractorAngle != this.frontWheels.rotationAngle){
+            if(this.tractorAngle < this.frontWheels.rotationAngle)
+                this.tractorAngle += 0.01
+            if(this.tractorAngle > this.frontWheels.rotationAngle)
+                this.tractorAngle -= 0.01 
+        }
+
+        this.move(-speed*Math.cos(this.frontWheels.rotationAngle),-speed*Math.sin(this.frontWheels.rotationAngle));    
+
+    }
+
+    moveBackward(speed){
+        if(this.tractorAngle != this.frontWheels.rotationAngle){
+            if(this.tractorAngle < this.frontWheels.rotationAngle)
+                this.tractorAngle += 0.01
+            if(this.tractorAngle > this.frontWheels.rotationAngle)
+                this.tractorAngle -= 0.01 
+        }
+        this.move(speed*Math.cos(this.frontWheels.rotationAngle),speed*Math.sin(this.frontWheels.rotationAngle));  
+    }
+
+    turnLeft(){
+        if(this.frontWheels.rotationAngle > Math.PI/2){
+            this.frontWheels.rotationAngle = Math.PI/2;
+        }
+
+            
+        else
+        this.frontWheels.rotationAngle -= 0.01;
+    }
+
+    turnRight(){
+        if(this.frontWheels.rotationAngle < -Math.PI/2){
+            this.frontWheels.rotationAngle = Math.PI/2;
+        }
+
+            
+        else
+        this.frontWheels.rotationAngle += 0.01;
+            
+    }
+
+
     updateWheels(currTime)
 	{
         this.backWheels.setAngle(this.backWheels.angle + (360/60.0)*(currTime/100.0));
+        // Differente angular speed between the front and back wheels so that they have the same velocity
+        // Since the front wheels are 60% of the size of the back ones, therefor the radius is 0.6*backWheelRadius,
+        // so the speed needs to be multiplied by 5/3
         currTime = currTime * 5/3;
+
         this.frontWheels.setAngle(this.frontWheels.angle + (360/60.0)*(currTime/100.0));
     };
 
-    rotateWheels(currTime)
-	{
-        this.frontWheels.setRot(this.frontWheels.rot + (360/60.0)*(currTime/100.0));
-    	//this.scene.rotate(0,0,currTime,1);
-    };
-
-    resetWheels(){
-    	this.frontWheels.resetRot();
-    }
-
 };
+

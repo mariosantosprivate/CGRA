@@ -136,36 +136,34 @@ class LightingScene extends CGFscene
         if (this.gui.isKeyPressed("KeyW")) {
 			text+=" W ";
 			this.tractor.updateWheels(10*this.speed);
+			this.tractor.moveForward(this.speed*0.03);
             keysPressed=true;
 		}
 		
 		if (this.gui.isKeyPressed("KeyA")) {
-            text+=" A ";
-            this.tractor.rotateWheels(10*this.speed);
+			text+=" A ";
+			this.tractor.turnLeft();
             keysPressed=true;
         }
 
         if (this.gui.isKeyPressed("KeyS")) {
 			text+=" S ";
-			this.tractor.updateWheels(-10*this.speed);
+			this.tractor.updateWheels(-9.5*this.speed);
+			this.tractor.moveBackward(this.speed*0.025);
             keysPressed=true;
         }
 
         if (this.gui.isKeyPressed("KeyD")) {
-            text+=" D ";
-            this.tractor.rotateWheels(-10*this.speed);
-            keysPressed=true;
-        }
-        if (this.gui.isKeyPressed("KeyR")) {
-            text+=" R ";
-            this.tractor.resetWheels();
+			text+=" D ";
+			this.tractor.turnRight();
             keysPressed=true;
         }
 
         if (keysPressed) {
             console.log(text);
         }
-    }
+	}
+	
 
 	display() 
 	{
