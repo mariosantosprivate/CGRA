@@ -28,7 +28,7 @@ class LightingScene extends CGFscene
 		this.Light1=false;  
 		this.Light2=false; 
 		this.Light3=false; 
-
+		this.texture='Red'; 
 		this.speed=3;
 		
 		this.Axis=true;
@@ -170,6 +170,9 @@ class LightingScene extends CGFscene
 	{
 		// ---- BEGIN Background, camera and axis setup
 
+		
+		globalVariable.globalTex=this.texture;
+		//console.log(globalVariable.globalTex);
 		// Clear image and depth buffer everytime we update the scene
 		this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
 		this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
