@@ -19,8 +19,8 @@ class MyVehicle extends CGFobject
         this.front = new MyQuad(this.scene);
         this.light = new MyHalfSphere(this.scene, 100, 100);
         this.sideWindow = new MyQuad(this.scene);
-        this.wheels = new MyWheel(this.scene);
-        
+        this.backWheels = new MyWheel(this.scene);
+        this.frontWheels = new MyWheel(this.scene);
         // Materials
 
         this.materialDefault = new CGFappearance(this.scene);
@@ -332,6 +332,7 @@ updateLights()
         this.lightAppearance.apply();
         this.light.display();
         this.scene.popMatrix();
+
         this.scene.pushMatrix();
         this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
         this.scene.translate(1.29,1.15,2);
@@ -340,9 +341,29 @@ updateLights()
         this.light.display();
         this.scene.popMatrix();
 
+        // Left Back Wheel
         this.scene.pushMatrix();
-        this.wheels.display();
-        this.scene.popMatrix();            
+        this.backWheels.display();
+        this.scene.popMatrix();
+        // Right Back Wheel
+        this.scene.pushMatrix();
+        this.scene.translate(0,0,-2.9);
+        this.backWheels.display();
+        this.scene.popMatrix(); 
+        
+        // Left Front Wheel
+        this.scene.pushMatrix();
+        this.scene.translate(-1.9,0,0.8);
+        this.scene.scale(0.6,0.6,0.6);
+        this.frontWheels.display();
+        this.scene.popMatrix();
+        // Right Front Wheel
+        this.scene.pushMatrix();
+        this.scene.translate(-1.9,0,-1.7);
+        this.scene.scale(0.6,0.6,0.6);
+        this.frontWheels.display();
+        this.scene.popMatrix(); 
+        
 
             //Bottom
             this.scene.pushMatrix();
@@ -369,7 +390,9 @@ updateLights()
 
     updateWheels(currTime)
 	{
-		this.wheels.setAngle(this.wheels.angle + (360/60.0)*(currTime/100.0));
+        this.backWheels.setAngle(this.backWheels.angle + (360/60.0)*(currTime/100.0));
+        currTime = currTime * 5/3;
+        this.frontWheels.setAngle(this.frontWheels.angle + (360/60.0)*(currTime/100.0));
     };
 
 };

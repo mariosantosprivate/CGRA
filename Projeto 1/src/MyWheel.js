@@ -1,6 +1,7 @@
 class MyWheel extends CGFobject
 {
 	constructor(scene, angle){
+        
 		super(scene);
 		this.angle = angle || 90;
         this.tire = new MyCylinder(this.scene, 100 ,100);
@@ -24,6 +25,7 @@ class MyWheel extends CGFobject
          //Back Wheels
 
             // Left
+
             this.scene.pushMatrix();
             this.scene.scale(1,1,0.9);
             this.scene.translate(1,1.2,2.2);
@@ -35,9 +37,10 @@ class MyWheel extends CGFobject
             this.scene.pushMatrix();
             this.scene.scale(1,1,0.9);
             this.scene.translate(1,1.2,2.2);
+            this.scene.rotate(this.angle * degToRad,0,0,1);
             this.scene.rotate(degToRad*180,1,0,0);
             this.wheelAppearance.apply();
-            this.scene.rotate(this.angle * degToRad,0,0,1);;
+            
             this.wheel.display();
             this.scene.popMatrix();
 
@@ -49,7 +52,7 @@ class MyWheel extends CGFobject
             this.wheel.display();
             this.scene.popMatrix();
            
-            // Right
+            /*// Right
             this.scene.pushMatrix();
             this.scene.scale(1,1,0.9);
             this.scene.translate(1,1.2,-1);
@@ -128,6 +131,6 @@ class MyWheel extends CGFobject
             this.wheel.display();
             this.scene.popMatrix();
         
-        
+        */
 	}
 };
