@@ -141,6 +141,7 @@ class LightingScene extends CGFscene
 		
 		if (this.gui.isKeyPressed("KeyA")) {
             text+=" A ";
+            this.tractor.rotateWheels(10*this.speed);
             keysPressed=true;
         }
 
@@ -152,6 +153,12 @@ class LightingScene extends CGFscene
 
         if (this.gui.isKeyPressed("KeyD")) {
             text+=" D ";
+            this.tractor.rotateWheels(-10*this.speed);
+            keysPressed=true;
+        }
+        if (this.gui.isKeyPressed("KeyR")) {
+            text+=" R ";
+            this.tractor.resetWheels();
             keysPressed=true;
         }
 

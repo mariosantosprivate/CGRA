@@ -395,4 +395,14 @@ updateLights()
         this.frontWheels.setAngle(this.frontWheels.angle + (360/60.0)*(currTime/100.0));
     };
 
+    rotateWheels(currTime)
+	{
+        this.frontWheels.setRot(this.frontWheels.rot + (360/60.0)*(currTime/100.0));
+    	//this.scene.rotate(0,0,currTime,1);
+    };
+
+    resetWheels(){
+    	this.frontWheels.resetRot();
+    }
+
 };
