@@ -1,7 +1,7 @@
 var degToRad = Math.PI / 180.0;
 
 var globalVariable ={
-	globalTex: 'Red'
+	globalTex: 'Main'
 }
 
 class LightingScene extends CGFscene 
@@ -36,7 +36,7 @@ class LightingScene extends CGFscene
 		
 		this.Axis=true;
 		
-		this.texture='Red'; 
+		this.texture='Main'; 
 
 		this.altimetry= [[ 13.0 , 15.0 , 12.0, 11.0, 12.0, 13.0, 12.0, 13.0],
 						[ 14.0 , 0.0 , 0.0, 0.0, 0.0, 0.0, 0.0, 13.0],

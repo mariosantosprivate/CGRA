@@ -157,6 +157,7 @@ updateLights()
             if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
             if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
             if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
+            if(this.texhere == 'Main') this.bodyAppearance.apply();
             this.rightEngineBay.display();
             this.scene.popMatrix();
 
@@ -169,6 +170,7 @@ updateLights()
             if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
             if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
             if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
+            if(this.texhere == 'Main') this.bodyAppearance.apply();
             this.leftEngineBay.display();
             this.scene.popMatrix();
 
@@ -184,6 +186,7 @@ updateLights()
             if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
             if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
             if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
+            if(this.texhere == 'Main') this.bodyAppearance.apply();
             this.side.display();
             this.scene.popMatrix();
 
@@ -196,6 +199,7 @@ updateLights()
             if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
             if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
             if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
+            if(this.texhere == 'Main') this.bodyAppearance.apply();
             this.side.display();
             this.scene.popMatrix();
 
@@ -227,6 +231,7 @@ updateLights()
         if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
             if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
             if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
+            if(this.texhere == 'Main') this.bodyAppearance.apply();
         this.front.display();
         this.scene.popMatrix();
 
@@ -241,6 +246,7 @@ updateLights()
         if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
             if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
             if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
+            if(this.texhere == 'Main') this.bodyAppearance.apply();
         this.front.display();
         this.scene.popMatrix();
 
@@ -254,6 +260,7 @@ updateLights()
         if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
             if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
             if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
+            if(this.texhere == 'Main') this.bodyAppearance.apply();
         this.front.display();
         this.scene.popMatrix();
 
@@ -346,6 +353,7 @@ updateLights()
             if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
             if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
             if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
+            if(this.texhere == 'Main') this.bodyAppearance.apply();
             this.front.display();
             this.scene.popMatrix();
 
