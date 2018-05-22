@@ -13,7 +13,7 @@ class MyVehicle extends CGFobject
         this.x = x || 0;
         this.y = y || 0;
         this.z = z || 0;
-        this.tractorAngle = 0.0;
+        this.tractorAngle = 0.0000000001;
         this.bodyAngle= 0.0;
         this.moveLeft = 0;
         this.moveRight = 0;
@@ -155,9 +155,14 @@ updateLights()
             this.scene.rotate(-this.tractorAngle, 0, 1, 0);
             //this.frontWheels.addRotation(this.tractorAngle);   
                 // Left Front Wheel
+                
                 this.scene.pushMatrix();
                 this.scene.scale(0.6,0.6,0.6);
                 this.scene.translate(-2.2,1.1,3.5);
+                if(this.tractorAngle == this.frontWheels.rotationAngle){
+                    this.scene.rotate(this.tractorAngle,0,1,0);
+                    this.frontWheels.adjustment = 0;
+                }
                 this.frontWheels.display();
                 this.scene.popMatrix();
                 
@@ -165,6 +170,10 @@ updateLights()
                 this.scene.pushMatrix();
                 this.scene.scale(0.6,0.6,0.6);
                 this.scene.translate(-2.2,1.1,-0.3);
+                if(this.tractorAngle == this.frontWheels.rotationAngle){
+                    this.scene.rotate(this.tractorAngle,0,1,0);
+                    this.frontWheels.adjustment = 0;
+                }
                 this.frontWheels.display();
                 this.scene.popMatrix();
             
@@ -421,26 +430,25 @@ updateLights()
 
     moveForward(speed)
     {
-        
         if(Math.abs(this.tractorAngle - this.frontWheels.rotationAngle)< 0.05)
         {
         this.tractorAngle = this.frontWheels.rotationAngle;
         this.bodyAngle =this.tractorAngle + this.frontWheels.rotationAngle;
         }
         else if(this.tractorAngle != this.frontWheels.rotationAngle || this.frontWheels.rotationAngle){
-
+            this.frontWheels.adjustment = this.tractorAngle;
             
             if(this.tractorAngle < this.tractorAngle + this.frontWheels.rotationAngle){
                 if(this.tractorAngle != Math.PI/4){
-                this.frontWheels.addRotation(-Math.PI/50);
-                this.tractorAngle += Math.PI/50;
+                this.frontWheels.addRotation(-Math.PI/400 * speed);
+                this.tractorAngle += Math.PI/400 * speed;
                 }
 
             }
             else if(this.tractorAngle > this.tractorAngle + this.frontWheels.rotationAngle){
                 if(this.tractorAngle != -Math.PI/4){
-                    this.frontWheels.addRotation(Math.PI/50);
-                    this.tractorAngle -= Math.PI/50;
+                    this.frontWheels.addRotation(Math.PI/400 * speed);
+                    this.tractorAngle -= Math.PI/400 * speed;
                     }
             }
         }
@@ -457,18 +465,18 @@ updateLights()
         }
 
         else if(this.tractorAngle != this.frontWheels.rotationAngle){
-            
+            this.frontWheels.adjustment = this.tractorAngle;
 
             if(this.tractorAngle < this.tractorAngle + this.frontWheels.rotationAngle){
                 if(this.tractorAngle != Math.PI/4){
-                    this.frontWheels.addRotation(-Math.PI/200);
-                    this.tractorAngle += Math.PI/200;
+                    this.frontWheels.addRotation(-Math.PI/400 * speed);
+                    this.tractorAngle += Math.PI/400 * speed;
                     }
             }
             if(this.tractorAngle > this.tractorAngle + this.frontWheels.rotationAngle){
-                if(this.tractorAngle != -Math.PI/4){
-                    this.frontWheels.addRotation(Math.PI/200);
-                    this.tractorAngle -= Math.PI/200;
+                if(this.tractorAngle != -Math.PI/400 * speed){
+                    this.frontWheels.addRotation(Math.PI/400 * speed);
+                    this.tractorAngle -= Math.PI/400 * speed;
                     }
             }
              

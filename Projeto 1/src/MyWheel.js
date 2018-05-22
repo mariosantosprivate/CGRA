@@ -5,6 +5,7 @@ class MyWheel extends CGFobject
 		super(scene);
         this.rotationAngle = 0;
         this.angle = angle || 90;
+        this.adjustment = 0.0;
         this.tire = new MyCylinder(this.scene, 100 ,100);
         this.wheel = new MyCircle(this.scene,100);
     
@@ -18,6 +19,7 @@ class MyWheel extends CGFobject
 
 	setAngle(angle){
 	    this.angle = angle;
+
     }
     
     setRotation(rotationAngle){
