@@ -35,7 +35,7 @@ class MyInterface extends CGFinterface {
 		// the identifier 'doSomething' must be a function declared as part of that object (i.e. a member of the scene class)
 		// e.g. LightingScene.prototype.doSomething = function () { console.log("Doing something..."); }; 
 
-		this.gui.add(this.scene, 'doSomething');	
+		this.gui.add(this.scene, 'showInstructions');	
 
 		var Lgroup=this.gui.addFolder("Lights");
 		//Lgroup.open();

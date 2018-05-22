@@ -511,5 +511,15 @@ updateLights()
         this.frontWheels.setAngle(this.frontWheels.angle + (360/60.0)*(currTime/100.0));
     };
 
+    resetVehicle(){
+    	this.x = 0;
+    	this.y = 0;
+    	this.z = 0;
+    	this.tractorAngle = 0.0000000001;
+        this.bodyAngle= 0.0;
+        this.moveLeft = 0;
+        this.moveRight = 0;
+    }
+
 };
 
