@@ -135,6 +135,8 @@ class LightingScene extends CGFscene
 
         if (this.gui.isKeyPressed("KeyW")) {
 			text+=" W ";
+			text+="Rot: " + this.tractor.frontWheels.rotationAngle;
+			text+="Angle " + this.tractor.tractorAngle;
 			this.tractor.updateWheels(10*this.speed);
 			this.tractor.moveForward(this.speed*0.03);
             keysPressed=true;

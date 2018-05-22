@@ -32,34 +32,32 @@ class MyWheel extends CGFobject
 	{
 	    var degToRad = Math.PI / 180.0;
          //Back Wheels
-         //this.scene.rotate(this.rotationAngle);
+        //this.scene.translate(0,0,-0.45);
+         this.scene.rotate(-this.rotationAngle,0,1,0);
 
             // Left
+                
+                this.scene.pushMatrix();
+                this.tireAppearance.apply();
+                this.scene.rotate(this.angle * degToRad,0,0,1);
+                this.tire.display();
+                this.scene.popMatrix();
 
-            this.scene.pushMatrix();
-            this.scene.scale(1,1,0.9);
-            this.scene.translate(1,1.2,2.2);
-            this.tireAppearance.apply();
-            this.scene.rotate(this.angle * degToRad,0,0,1);
-            this.tire.display();
-            this.scene.popMatrix();
-
-            this.scene.pushMatrix();
-            this.scene.scale(1,1,0.9);
-            this.scene.translate(1,1.2,2.2);
-            this.scene.rotate(this.angle * degToRad,0,0,1);
-            this.scene.rotate(degToRad*180,1,0,0);
-            this.wheelAppearance.apply();
+                this.scene.pushMatrix();
+                this.scene.translate(0,0,0.45)
+                this.scene.rotate(this.angle * degToRad,0,0,1);
+                this.wheelAppearance.apply();
+                this.wheel.display();
+                this.scene.popMatrix();
+                
+                this.scene.pushMatrix();
+                this.scene.rotate(this.angle * degToRad,0,0,1);
+                this.scene.rotate(degToRad*180,1,0,0);
+                this.scene.translate(0,0,0.45)
+                this.wheelAppearance.apply();
+                this.wheel.display();
+                this.scene.popMatrix();
             
-            this.wheel.display();
-            this.scene.popMatrix();
 
-            this.scene.pushMatrix();
-            this.scene.scale(1,1,1.08);
-            this.scene.translate(1,1.2,2.65);
-            this.wheelAppearance.apply();
-            this.scene.rotate(this.angle * degToRad,0,0,1);;
-            this.wheel.display();
-            this.scene.popMatrix();
-	}
+        }
 };
