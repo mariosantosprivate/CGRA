@@ -55,7 +55,7 @@ class LightingScene extends CGFscene
 		this.terrain = new MyTerrain(this, 8 , this.altimetry);
 		this.trap = new MyLongTrap(this, 0, 0, 0, 0);
 		this.tractor = new MyVehicle(this);
-		
+		this.crane = new MyCrane(this, -5, 0, -5);
 		
 		//Materials
 		this.materialDefault = new CGFappearance(this);
@@ -123,8 +123,8 @@ class LightingScene extends CGFscene
 
         if (this.gui.isKeyPressed("KeyW")) {
 			text+=" W ";
-			text+="Rot: " + this.tractor.frontWheels.rotationAngle;
-			text+="Angle " + this.tractor.tractorAngle;
+			//text+="Rot: " + this.tractor.frontWheels.rotationAngle;
+			//text+="Angle " + this.tractor.tractorAngle;
 			this.tractor.updateWheels(10*this.speed);
 			this.tractor.moveForward(this.speed*0.03);
             keysPressed=true;
@@ -152,6 +152,36 @@ class LightingScene extends CGFscene
 		if (this.gui.isKeyPressed("KeyR")) {
 			text+=" R ";
 			this.tractor.resetVehicle();
+            keysPressed=true;
+        }
+
+        if (this.gui.isKeyPressed("KeyJ")) {
+			text+=" J ";
+			this.crane.rotateRight(0.2*this.speed);
+            keysPressed=true;
+        }
+
+        if (this.gui.isKeyPressed("KeyL")) {
+			text+=" L ";
+			this.crane.rotateLeft(0.2*this.speed);
+            keysPressed=true;
+        }
+
+		if (this.gui.isKeyPressed("KeyI")) {
+			text+=" I ";
+			this.crane.rotateUp(0.2*this.speed);
+            keysPressed=true;
+        }
+
+        if (this.gui.isKeyPressed("KeyK")) {
+			text+=" K ";
+			this.crane.rotateDown(0.2*this.speed);
+            keysPressed=true;
+        }
+
+        if (this.gui.isKeyPressed("KeyP")) {
+			text+=" P ";
+			this.crane.resetCrane();
             keysPressed=true;
         }
 
@@ -209,6 +239,10 @@ class LightingScene extends CGFscene
 		// Vehicle
 		this.pushMatrix();
 		this.tractor.display();
+		this.popMatrix();
+
+		this.pushMatrix();
+		this.crane.display();
 		this.popMatrix();
 		// ---- END Scene drawing section
 	//this.tractor.updateWheels(currTime);

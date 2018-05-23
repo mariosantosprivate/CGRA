@@ -19,6 +19,8 @@ serialInclude([
 	'MyTerrain.js',
 	'Plane.js',
 	'MyWheel.js',
+	'MyCrane.js',
+	'MyCubeM.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);
