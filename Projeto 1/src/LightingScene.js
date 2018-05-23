@@ -155,13 +155,13 @@ class LightingScene extends CGFscene
             keysPressed=true;
         }
 
-        if (this.gui.isKeyPressed("KeyJ")) {
-			text+=" J ";
+        if (this.gui.isKeyPressed("KeyL")) {
+			text+=" L ";
 			this.crane.rotateRight(0.2*this.speed);
             keysPressed=true;
         }
 
-        if (this.gui.isKeyPressed("KeyL")) {
+        if (this.gui.isKeyPressed("KeyJ")) {
 			text+=" L ";
 			this.crane.rotateLeft(0.2*this.speed);
             keysPressed=true;
