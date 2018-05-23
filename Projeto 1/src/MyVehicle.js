@@ -14,6 +14,7 @@ class MyVehicle extends CGFobject
         this.y = y || 0;
         this.z = z || 0;
         this.tractorAngle = 0.0000000001;
+        this.tractorAngleT = 0.0000000001;
         this.bodyAngle= 0.0;
         this.moveLeft = 0;
         this.moveRight = 0;
@@ -178,45 +179,45 @@ updateLights()
                 this.scene.popMatrix();
             
 
-                            // Left Back Wheel
-                            this.scene.pushMatrix();
-                            this.scene.translate(1,1.1,2);
-                            this.backWheels.display();
-                            this.scene.popMatrix();
+				// Left Back Wheel
+				this.scene.pushMatrix();
+					this.scene.translate(1,1.1,2);
+					this.backWheels.display();
+				this.scene.popMatrix();
                             
-                            // Right Back Wheel
-                            this.scene.pushMatrix();
-                            this.scene.translate(1,1.1,-0.1);
-                            this.backWheels.display();
-                            this.scene.popMatrix(); 
+				// Right Back Wheel
+				this.scene.pushMatrix();
+					this.scene.translate(1,1.1,-0.1);
+					this.backWheels.display();
+				this.scene.popMatrix(); 
 
         //Engine Bay
            
             this.texhere = globalVariable.globalTex;
             //Right Engine Bay
             this.scene.pushMatrix();
-            //ligeiro offset para evitar "z fighting"
-            this.scene.translate(0,0.5,0.01);
-            this.scene.scale(2,1,0);
-            this.scene.translate(0,0.9,0);
-            if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
-            if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
-            if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
-            if(this.texhere == 'Main') this.bodyAppearance.apply();
-            this.rightEngineBay.display();
+				//ligeiro offset para evitar "z fighting"
+				this.scene.translate(0,0.5,0.01);
+				this.scene.scale(2,1,0);
+				this.scene.translate(0,0.9,0);
+				if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
+				if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
+				if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
+				if(this.texhere == 'Main') this.bodyAppearance.apply();
+				this.rightEngineBay.display();
             this.scene.popMatrix();
 
             //Left Engine Bay
             this.scene.pushMatrix();
-            //ligeiro offset para evitar "z fighting"
-            this.scene.translate(0,0.5,2.0);
-            this.scene.scale(2,1,0);
-            this.scene.translate(0,0.9,0);
-            if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
-            if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
-            if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
-            if(this.texhere == 'Main') this.bodyAppearance.apply();
-            this.leftEngineBay.display();
+				//ligeiro offset para evitar "z fighting"
+				this.scene.translate(0,0.5,2.0);
+				this.scene.scale(2,1,0);
+				this.scene.translate(0,0.9,0);
+				if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
+				if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
+				if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
+				if(this.texhere == 'Main') this.bodyAppearance.apply();
+				this.leftEngineBay.display();
             this.scene.popMatrix();
 
         //Sides
@@ -224,167 +225,167 @@ updateLights()
             //Right Side
             
             this.scene.pushMatrix();
-            this.scene.rotate(degToRad*180,0,1,0);
-            this.scene.translate(-1,0.7,0);
-            this.scene.scale(1,1.5,1);
-            this.scene.translate(0,0.6,0);
-            if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
-            if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
-            if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
-            if(this.texhere == 'Main') this.bodyAppearance.apply();
-            this.side.display();
+				this.scene.rotate(degToRad*180,0,1,0);
+				this.scene.translate(-1,0.7,0);
+				this.scene.scale(1,1.5,1);
+				this.scene.translate(0,0.6,0);
+				if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
+				if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
+				if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
+				if(this.texhere == 'Main') this.bodyAppearance.apply();
+				this.side.display();
             this.scene.popMatrix();
 
             //Left Side
             
             this.scene.pushMatrix();
-            this.scene.translate(1,0.7,1.99);
-            this.scene.scale(1,1.5,1);
-            this.scene.translate(0,0.6,0);
-            if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
-            if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
-            if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
-            if(this.texhere == 'Main') this.bodyAppearance.apply();
-            this.side.display();
+				this.scene.translate(1,0.7,1.99);
+				this.scene.scale(1,1.5,1);
+				this.scene.translate(0,0.6,0);
+				if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
+				if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
+				if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
+				if(this.texhere == 'Main') this.bodyAppearance.apply();
+				this.side.display();
             this.scene.popMatrix();
 
         //Front
-        this.scene.pushMatrix();
-        this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
-        this.scene.translate(1.0,0.49,2);
-        this.scene.scale(2.05,1,2.0);
-        this.scene.translate(0,0.9,0);
-        this.front.display();
-        this.scene.popMatrix();
+			this.scene.pushMatrix();
+			this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
+			this.scene.translate(1.0,0.49,2);
+			this.scene.scale(2.05,1,2.0);
+			this.scene.translate(0,0.9,0);
+			this.front.display();
+			this.scene.popMatrix();
 
-        this.scene.pushMatrix();
-        this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
-        this.scene.translate(1.0,0.49,2.02);
-        this.scene.scale(1,1,2.0);
-        this.scene.translate(0,0.9,0);
-        this.grillAppearance.apply();
-        this.front.display();
-        this.scene.popMatrix();
+			this.scene.pushMatrix();
+			this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
+			this.scene.translate(1.0,0.49,2.02);
+			this.scene.scale(1,1,2.0);
+			this.scene.translate(0,0.9,0);
+			this.grillAppearance.apply();
+			this.front.display();
+			this.scene.popMatrix();
 
-        //Roof
-        this.scene.pushMatrix();
-        this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
-        this.scene.rotate(degToRad*90 + Math.PI,1,0,0);
-        this.scene.translate(1,1,2.2);
-        this.scene.scale(2.02,1.0,2.0);
-        this.scene.translate(0,0,0.45);
-        if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
-            if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
-            if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
-            if(this.texhere == 'Main') this.bodyAppearance.apply();
-        this.front.display();
-        this.scene.popMatrix();
+			//Roof
+			this.scene.pushMatrix();
+			this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
+			this.scene.rotate(degToRad*90 + Math.PI,1,0,0);
+			this.scene.translate(1,1,2.2);
+			this.scene.scale(2.02,1.0,2.0);
+			this.scene.translate(0,0,0.45);
+			if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
+				if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
+				if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
+				if(this.texhere == 'Main') this.bodyAppearance.apply();
+			this.front.display();
+			this.scene.popMatrix();
 
-        //Hood
-        this.scene.pushMatrix();
-        this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
-        this.scene.rotate(degToRad*90 + Math.PI,1,0,0);
-        this.scene.rotate(degToRad*10,1,0,0);
-        this.scene.translate(1.01,-0.55,1.3);
-        this.scene.translate(0,0.15,0.9);
-        this.scene.scale(2.01,2.5,2.0);
-        if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
-            if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
-            if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
-            if(this.texhere == 'Main') this.bodyAppearance.apply();
-        this.front.display();
-        this.scene.popMatrix();
+			//Hood
+			this.scene.pushMatrix();
+			this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
+			this.scene.rotate(degToRad*90 + Math.PI,1,0,0);
+			this.scene.rotate(degToRad*10,1,0,0);
+			this.scene.translate(1.01,-0.55,1.3);
+			this.scene.translate(0,0.15,0.9);
+			this.scene.scale(2.01,2.5,2.0);
+			if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
+				if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
+				if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
+				if(this.texhere == 'Main') this.bodyAppearance.apply();
+			this.front.display();
+			this.scene.popMatrix();
 
-        //Back
-        this.scene.pushMatrix();
-        this.scene.rotate(degToRad*90,0,1,0);
-        this.scene.rotate(degToRad*-12.5,1,0,0);
-        this.scene.translate(-1,0.55, 1.925);
-        this.scene.scale(2.02,2.3,2.0);
-        this.scene.translate(0,0.45,0.1);
-        if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
-            if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
-            if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
-            if(this.texhere == 'Main') this.bodyAppearance.apply();
-        this.front.display();
-        this.scene.popMatrix();
+			//Back
+			this.scene.pushMatrix();
+			this.scene.rotate(degToRad*90,0,1,0);
+			this.scene.rotate(degToRad*-12.5,1,0,0);
+			this.scene.translate(-1,0.55, 1.925);
+			this.scene.scale(2.02,2.3,2.0);
+			this.scene.translate(0,0.45,0.1);
+			if(this.texhere == 'Cow') this.bodyAppearanceCow.apply();
+				if(this.texhere == 'Face') this.bodyAppearanceFace.apply();
+				if(this.texhere == 'Red') this.bodyAppearanceRed.apply();
+				if(this.texhere == 'Main') this.bodyAppearance.apply();
+			this.front.display();
+			this.scene.popMatrix();
 
-        //Front Window
-        this.scene.pushMatrix();
-        this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
-        this.scene.rotate(degToRad*-12.5,1,0,0);
-        this.scene.translate(1,1.75, -0.1);
-        this.scene.scale(1.98,1.0,2.0);
-        this.scene.translate(0,0.9,0.09);
-        this.bodyAppearance.apply();
-        this.front.display();
-        this.scene.popMatrix();
-        this.scene.pushMatrix();
-        this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
-        this.scene.rotate(degToRad*-12.5,1,0,0);
-        this.scene.translate(1,1.75, -0.05);
-        this.scene.scale(1.98,1.0,2.0);
-        this.scene.translate(0,0.9,0.09);
-        this.windowAppearance.apply();
-        this.front.display();
-        this.scene.popMatrix();
+			//Front Window
+			this.scene.pushMatrix();
+			this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
+			this.scene.rotate(degToRad*-12.5,1,0,0);
+			this.scene.translate(1,1.75, -0.1);
+			this.scene.scale(1.98,1.0,2.0);
+			this.scene.translate(0,0.9,0.09);
+			this.bodyAppearance.apply();
+			this.front.display();
+			this.scene.popMatrix();
+			this.scene.pushMatrix();
+			this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
+			this.scene.rotate(degToRad*-12.5,1,0,0);
+			this.scene.translate(1,1.75, -0.05);
+			this.scene.scale(1.98,1.0,2.0);
+			this.scene.translate(0,0.9,0.09);
+			this.windowAppearance.apply();
+			this.front.display();
+			this.scene.popMatrix();
 
-        
-        //Back Window
-        this.scene.pushMatrix();
-        this.scene.rotate(degToRad*90,0,1,0);
-        this.scene.rotate(degToRad*-12.5,1,0,0);
-        this.scene.translate(-1,2.3, 2.15);
-        this.scene.scale(2,0.7,0);
-        this.bodyAppearance.apply();
-        this.front.display();
-        this.scene.popMatrix();
-        this.scene.pushMatrix();
-        this.scene.rotate(degToRad*90,0,1,0);
-        this.scene.rotate(degToRad*-12.5,1,0,0);
-        this.scene.translate(-1,2.3, 2.16);
-        this.scene.scale(1.9,0.7,0);
-        this.windowAppearance.apply();
-        this.front.display();
-        this.scene.popMatrix();
 
-        //Right Side Window
-        this.scene.pushMatrix();
-        this.scene.rotate(degToRad*180,0,1,0);
-        this.scene.translate(-1,1.7,0.01);
-        this.scene.scale(0.4,0.45,0.4);
-        this.scene.translate(0,2,0);
-        this.windowAppearance.apply();
-        this.side.display();
-        this.scene.popMatrix();
-        
-        //Left Side Window
-        this.scene.pushMatrix();
-        this.scene.translate(1,1.7,2.01);
-        this.scene.scale(0.4,0.45,0.4);
-        this.scene.translate(0,2,0);
-        this.windowAppearance.apply();
-        
-        this.side.display();
-        this.scene.popMatrix();
+			//Back Window
+			this.scene.pushMatrix();
+			this.scene.rotate(degToRad*90,0,1,0);
+			this.scene.rotate(degToRad*-12.5,1,0,0);
+			this.scene.translate(-1,2.3, 2.15);
+			this.scene.scale(2,0.7,0);
+			this.bodyAppearance.apply();
+			this.front.display();
+			this.scene.popMatrix();
+			this.scene.pushMatrix();
+			this.scene.rotate(degToRad*90,0,1,0);
+			this.scene.rotate(degToRad*-12.5,1,0,0);
+			this.scene.translate(-1,2.3, 2.16);
+			this.scene.scale(1.9,0.7,0);
+			this.windowAppearance.apply();
+			this.front.display();
+			this.scene.popMatrix();
 
-               
-        //Lights
-        this.scene.pushMatrix();
-        this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
-        this.scene.translate(0.715,1.15,2);
-        this.scene.scale(0.16,0.16,0.06);
-        this.lightAppearance.apply();
-        this.light.display();
-        this.scene.popMatrix();
+			//Right Side Window
+			this.scene.pushMatrix();
+			this.scene.rotate(degToRad*180,0,1,0);
+			this.scene.translate(-1,1.7,0.01);
+			this.scene.scale(0.4,0.45,0.4);
+			this.scene.translate(0,2,0);
+			this.windowAppearance.apply();
+			this.side.display();
+			this.scene.popMatrix();
 
-        this.scene.pushMatrix();
-        this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
-        this.scene.translate(1.29,1.15,2);
-        this.scene.scale(0.16,0.16,0.06);
-        this.lightAppearance.apply();
-        this.light.display();
-        this.scene.popMatrix();
+			//Left Side Window
+			this.scene.pushMatrix();
+			this.scene.translate(1,1.7,2.01);
+			this.scene.scale(0.4,0.45,0.4);
+			this.scene.translate(0,2,0);
+			this.windowAppearance.apply();
+
+			this.side.display();
+			this.scene.popMatrix();
+
+
+			//Lights
+			this.scene.pushMatrix();
+			this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
+			this.scene.translate(0.715,1.15,2);
+			this.scene.scale(0.16,0.16,0.06);
+			this.lightAppearance.apply();
+			this.light.display();
+			this.scene.popMatrix();
+
+			this.scene.pushMatrix();
+			this.scene.rotate(degToRad*90 + Math.PI,0,1,0);
+			this.scene.translate(1.29,1.15,2);
+			this.scene.scale(0.16,0.16,0.06);
+			this.lightAppearance.apply();
+			this.light.display();
+			this.scene.popMatrix();
 
 
         
@@ -487,14 +488,14 @@ updateLights()
 
     turnLeft(){
         if(this.frontWheels.rotationAngle < - Math.PI/4)
-            this.frontWheels.setRotation(-Math.PI/4);
+            this.frontWheels.setRotation(-Math.PI/4+this.tractorAngle);
         else
             this.frontWheels.rotationAngle -= Math.PI/100;
     }
 
     turnRight(){
         if(this.frontWheels.rotationAngle > Math.PI/4)
-            this.frontWheels.setRotation(Math.PI/4);
+            this.frontWheels.setRotation(Math.PI/4+this.tractorAngle);
         else
             this.frontWheels.addRotation(Math.PI/100);            
     }
@@ -516,7 +517,9 @@ updateLights()
     	this.y = 0;
     	this.z = 0;
     	this.tractorAngle = 0.0000000001;
+    	this.tractorAngleT = 0.0000000001;
         this.bodyAngle= 0.0;
+        this.frontWheels.rotationAngle=0;
         this.moveLeft = 0;
         this.moveRight = 0;
     }
