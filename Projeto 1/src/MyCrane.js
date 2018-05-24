@@ -13,8 +13,8 @@ class MyCrane extends CGFobject
         this.x = x || 0;
         this.y = y || 0;
         this.z = z || 0;
-        this.horizontalAngle = 0;
-        this.verticalAngle = 0;
+        this.horizontalAngle = 4.17;
+		this.verticalAngle = -3.05;
         this.mainArm = new MyCubeM(this.scene);
         this.secondArm = new MyCubeM(this.scene);
 		this.stringArm = new MyCubeM(this.scene);
@@ -95,18 +95,17 @@ class MyCrane extends CGFobject
         this.scene.popMatrix();
         this.scene.popMatrix();
         this.scene.popMatrix();
+        this.scene.popMatrix();
              
 		this.scene.rotate(-this.tractorAngle, 0, 1, 0);
-
-
 
 
     };
 
    
     resetCrane(){
-		this.horizontalAngle = 0;
-		this.verticalAngle = 0;
+		this.horizontalAngle = 4.17;
+		this.verticalAngle = -3.05;
 
     }
 
@@ -129,6 +128,14 @@ class MyCrane extends CGFobject
 		this.verticalAngle = this.verticalAngle - (360/60.0)*(currTime/100.0)
     	
     }
+
+    getHangle(){
+    	return this.horizontalAngle - 4.17;
+    } 
+
+    getVangle(){
+    	return this.verticalAngle + 3.05;
+    } 
 
 };
 

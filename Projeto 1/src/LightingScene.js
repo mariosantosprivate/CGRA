@@ -55,8 +55,10 @@ class LightingScene extends CGFscene
 		this.terrain = new MyTerrain(this, 8 , this.altimetry);
 		this.trap = new MyLongTrap(this, 0, 0, 0, 0);
 		this.tractor = new MyVehicle(this);
+		this.pickUpZone = new MyCube(this);
 		this.crane = new MyCrane(this, -5, 0, -5);
 		
+
 		//Materials
 		this.materialDefault = new CGFappearance(this);
 
@@ -253,10 +255,28 @@ class LightingScene extends CGFscene
 		this.tractor.display();
 		this.popMatrix();
 
+		// Crane
 		this.pushMatrix();
 		this.crane.display();
 		this.popMatrix();
+
+		// Pickup Zone
+		this.pushMatrix();
+		this.translate(1.5, 0, 25);
+		this.scale(5,0.2,5);
+		this.pickUpZone.display();
+		this.popMatrix();
 		// ---- END Scene drawing section
+
+
+		if(this.tractor.x > -6.5 + Math.cos(this.crane.getHangle()) && this.tractor.x < -3.5 + Math.cos(this.crane.getHangle()) && this.tractor.z > 17.5 + Math.sin(this.crane.getHangle()) && this.tractor.z < 20.5 + Math.sin(this.crane.getHangle())){
+			console.log("RIGHTO");
+			this.tractor.x = -4 + Math.cos(this.crane.getHangle());
+			this.tractor.y= 1;
+			this.tractor.z = 19 + Math.sin(this.crane.getHangle());
+			this.tractor.speed = 0;
+			this.tractor.angle = 0;
+		}
 	
 	};
 	update(currTime){

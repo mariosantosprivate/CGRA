@@ -152,11 +152,14 @@ updateLights()
         this.scene.lights[i].update();
 }
 
+	
+
+
     display()
     {
         this.scene.pushMatrix();
-
-        this.scene.translate(this.x, 0, this.z);
+			
+        this.scene.translate(this.x, this.y, this.z);
         this.scene.rotate(this.angle*degToRad, 0, 1, 0);
         
                 // Left Front Wheel
@@ -452,6 +455,7 @@ updateLights()
         this.frontWheels.rotationAngle=0;
         this.moveLeft = 0;
         this.moveRight = 0;
+        this.speed = 0.0;
     };
 
 };
