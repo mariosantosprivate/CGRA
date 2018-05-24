@@ -31,7 +31,7 @@ class LightingScene extends CGFscene
 		this.Light1=true;  
 		this.Light2=true; 
 		this.Light3=true; 
-
+		this.stucky=false;
 		this.speed=3;
 		
 		this.Axis=true;
@@ -74,7 +74,7 @@ class LightingScene extends CGFscene
 
 	initLights() 
 	{
-		this.setGlobalAmbientLight(0.2,0.2,0.3,1);
+		this.setGlobalAmbientLight(1,1,1,1);
 
 		// Lights positions
 
@@ -269,14 +269,17 @@ class LightingScene extends CGFscene
 		// ---- END Scene drawing section
 
 
-		if(this.tractor.x > -6.5 + Math.cos(this.crane.getHangle()) && this.tractor.x < -3.5 + Math.cos(this.crane.getHangle()) && this.tractor.z > 17.5 + Math.sin(this.crane.getHangle()) && this.tractor.z < 20.5 + Math.sin(this.crane.getHangle())){
-			console.log("RIGHTO");
-			this.tractor.x = -4 + Math.cos(this.crane.getHangle());
+		if(this.tractor.x > -5.5 && this.tractor.x < -2.5 && this.tractor.z > 17.5 && this.tractor.z < 20.5 ){
+			this.stucky = true;
+		}
+		if(this.stucky){
+			this.tractor.x = -3;
 			this.tractor.y= 1;
-			this.tractor.z = 19 + Math.sin(this.crane.getHangle());
+			this.tractor.z = 19 ;
 			this.tractor.speed = 0;
 			this.tractor.angle = 0;
 		}
+		
 	
 	};
 	update(currTime){

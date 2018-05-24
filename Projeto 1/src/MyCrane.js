@@ -13,8 +13,11 @@ class MyCrane extends CGFobject
         this.x = x || 0;
         this.y = y || 0;
         this.z = z || 0;
-        this.horizontalAngle = 4.17;
-		this.verticalAngle = -3.05;
+        this.mx = 0;
+        this.my = 0;
+        this.mz = 1;
+        this.horizontalAngle = 0;
+		this.verticalAngle = 0;
         this.mainArm = new MyCubeM(this.scene);
         this.secondArm = new MyCubeM(this.scene);
 		this.stringArm = new MyCubeM(this.scene);
@@ -49,6 +52,7 @@ class MyCrane extends CGFobject
         this.scene.pushMatrix();
         this.craneAppearance.apply();
         this.scene.rotate(Math.PI/4,0,0,1);
+        this.scene.rotate(4.17*Math.PI/8,1,1,0);
         this.scene.rotate(this.horizontalAngle*Math.PI/8,1,1,0);
         this.scene.scale(2,20,2,1);
         this.mainArm.display();
@@ -57,6 +61,7 @@ class MyCrane extends CGFobject
 		this.scene.pushMatrix();
 		this.scene.translate(0,1,0);
 		this.scene.scale(1/2,1/20,1/2,1);
+		this.scene.rotate(-3.05*Math.PI/8,0,0,-1);
 		this.scene.rotate(this.verticalAngle*Math.PI/8,0,0,-1);
         this.scene.scale(2,20,2,1);
         this.scene.scale(0.6,0.6,0.6,1);
@@ -69,6 +74,7 @@ class MyCrane extends CGFobject
         this.scene.scale(1/2,1/20,1/2,1);
 		this.scene.scale(1/0.6,1/0.6,1/0.6,1);
         this.scene.rotate(3/4*Math.PI,0,0,1);
+        this.scene.rotate(-3.05*Math.PI/8,0,0,1);
         this.scene.rotate(this.verticalAngle*Math.PI/8,0,0,1);
         this.scene.scale(2,20,2,1);
         this.scene.scale(0.6,0.6,0.6,1);
@@ -99,24 +105,30 @@ class MyCrane extends CGFobject
              
 		this.scene.rotate(-this.tractorAngle, 0, 1, 0);
 
+		console.log(this.mz);
 
     };
 
    
     resetCrane(){
-		this.horizontalAngle = 4.17;
-		this.verticalAngle = -3.05;
+		this.horizontalAngle = 0;
+		this.verticalAngle = 0;
+		this.mx = 0;
+		this. my = 0;
+		this.mz = 1;
 
     }
 
     rotateRight(currTime){
 		this.horizontalAngle = this.horizontalAngle - (360/60.0)*(currTime/100.0)
-    	
+    	this.mx = Math.sin(this.horizontalAngle*Math.PI/8);
+    	this.mz = Math.cos(this.horizontalAngle*Math.PI/8);
     }
 
     rotateLeft(currTime){
 		this.horizontalAngle = this.horizontalAngle + (360/60.0)*(currTime/100.0)
-    	
+    	this.mx = Math.sin(this.horizontalAngle*Math.PI/8);
+    	this.mz = Math.cos(this.horizontalAngle*Math.PI/8);
     }
 
     rotateUp(currTime){
@@ -128,14 +140,6 @@ class MyCrane extends CGFobject
 		this.verticalAngle = this.verticalAngle - (360/60.0)*(currTime/100.0)
     	
     }
-
-    getHangle(){
-    	return this.horizontalAngle - 4.17;
-    } 
-
-    getVangle(){
-    	return this.verticalAngle + 3.05;
-    } 
 
 };
 
