@@ -273,13 +273,14 @@ class LightingScene extends CGFscene
 			this.stucky = true;
 		}
 		if(this.stucky){
-			this.tractor.x = -3;
-			this.tractor.y= 1;
-			this.tractor.z = 19 ;
+			this.tractor.x = -3+this.crane.mx*24.3;
+			this.tractor.y= 1 + this.crane.my*10;
+			this.tractor.z = -5+this.crane.mz*24.3;
 			this.tractor.speed = 0;
 			this.tractor.angle = 0;
 		}
 		
+		console.log(Math.sqrt(Math.pow(this.tractor.x+5,2) + Math.pow(this.tractor.z+5,2)));
 	
 	};
 	update(currTime){

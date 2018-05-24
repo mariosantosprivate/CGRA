@@ -105,7 +105,11 @@ class MyCrane extends CGFobject
              
 		this.scene.rotate(-this.tractorAngle, 0, 1, 0);
 
-		console.log(this.mz);
+		//console.log(this.mz);
+
+		this.mx = Math.sin(this.horizontalAngle*Math.PI/8)*Math.cos(this.verticalAngle*Math.PI/8);
+    	this.my = Math.sin(this.verticalAngle*Math.PI/8);
+    	this.mz = Math.cos(this.horizontalAngle*Math.PI/8)*Math.cos(this.verticalAngle*Math.PI/8);
 
     };
 
@@ -121,14 +125,10 @@ class MyCrane extends CGFobject
 
     rotateRight(currTime){
 		this.horizontalAngle = this.horizontalAngle - (360/60.0)*(currTime/100.0)
-    	this.mx = Math.sin(this.horizontalAngle*Math.PI/8);
-    	this.mz = Math.cos(this.horizontalAngle*Math.PI/8);
     }
 
     rotateLeft(currTime){
 		this.horizontalAngle = this.horizontalAngle + (360/60.0)*(currTime/100.0)
-    	this.mx = Math.sin(this.horizontalAngle*Math.PI/8);
-    	this.mz = Math.cos(this.horizontalAngle*Math.PI/8);
     }
 
     rotateUp(currTime){
@@ -138,7 +138,6 @@ class MyCrane extends CGFobject
 
     rotateDown(currTime){
 		this.verticalAngle = this.verticalAngle - (360/60.0)*(currTime/100.0)
-    	
     }
 
 };
