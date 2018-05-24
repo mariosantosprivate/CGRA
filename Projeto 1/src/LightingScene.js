@@ -50,7 +50,7 @@ class LightingScene extends CGFscene
 						];
 
 		// Scene elements
-		this.ruler = 
+		this.prevTime = 1000;
 		new MyQuad(this, 0, 1, 0, 1);
 		this.terrain = new MyTerrain(this, 8 , this.altimetry);
 		this.trap = new MyLongTrap(this, 0, 0, 0, 0);
@@ -62,7 +62,7 @@ class LightingScene extends CGFscene
 
 		this.enableTextures(true);
 		
-		this.setUpdatePeriod(100);
+		this.setUpdatePeriod(16);
 	};
 
 	initCameras() 
@@ -119,35 +119,55 @@ class LightingScene extends CGFscene
 	}
 	checkKeys() {
         var text="Keys pressed: ";
-        var keysPressed=false;
+		var keysPressed=false;
+		
+		/* TRACTOR */
+
+		var pressingW = false;
+		var pressingS = false;
+		var pressingA = false;
+		var pressingD = false;
 
         if (this.gui.isKeyPressed("KeyW")) {
 			text+=" W ";
+			pressingW = true;			
 			//text+="Rot: " + this.tractor.frontWheels.rotationAngle;
-			//text+="Angle " + this.tractor.tractorAngle;
-			this.tractor.updateWheels(10*this.speed);
-			this.tractor.moveForward(this.speed*0.03);
-            keysPressed=true;
+			text+="AngleT " + this.tractor.angle;
+			text+="Angle " + this.tractor.frontWheels.rotationAngle;
+			this.tractor.accelerate(this.speed*3);
 		}
+
+		if (this.gui.isKeyPressed("KeyS")) {
+			text+=" S ";
+			pressingS=true;			
+			this.tractor.deccelerate(this.speed*3)
+        }
 		
 		if (this.gui.isKeyPressed("KeyA")) {
 			text+=" A ";
-			this.tractor.turnLeft();
-            keysPressed=true;
+			pressingA=true;
+			this.tractor.frontWheels.turnLeft(0.1);
         }
 
-        if (this.gui.isKeyPressed("KeyS")) {
-			text+=" S ";
-			this.tractor.updateWheels(-9.5*this.speed);
-			this.tractor.moveBackward(this.speed*0.025);
-            keysPressed=true;
-        }
+
 
         if (this.gui.isKeyPressed("KeyD")) {
 			text+=" D ";
-			this.tractor.turnRight();
-            keysPressed=true;
-        }
+			pressingD=true;
+			this.tractor.frontWheels.turnRight(0.1);
+		}
+		
+		if(pressingA == false && pressingD == false && this.tractor.frontWheels.rotationAngle > 0.05)
+		this.tractor.frontWheels.turnRight(0.03);
+		else if(pressingA == false && pressingD == false && this.tractor.frontWheels.rotationAngle < -0.05)
+		this.tractor.frontWheels.turnLeft(0.03);
+
+		if(pressingW == false && pressingS == false && this.tractor.speed > 0.05)
+		this.tractor.speed -= 0.1;
+		else if(pressingW == false && pressingS == false && this.tractor.speed < -0.05)
+		this.tractor.speed += 0.1;
+
+		/* CRANE */
 
 		if (this.gui.isKeyPressed("KeyR")) {
 			text+=" R ";
@@ -162,7 +182,7 @@ class LightingScene extends CGFscene
         }
 
         if (this.gui.isKeyPressed("KeyJ")) {
-			text+=" L ";
+			text+=" J ";
 			this.crane.rotateLeft(0.2*this.speed);
             keysPressed=true;
         }
@@ -183,11 +203,12 @@ class LightingScene extends CGFscene
 			text+=" P ";
 			this.crane.resetCrane();
             keysPressed=true;
-        }
+		}
 
-        if (keysPressed) {
+		if (keysPressed) {
             console.log(text);
         }
+
 	}
 	
 
@@ -221,16 +242,7 @@ class LightingScene extends CGFscene
 		// ---- END Background, camera and axis setup
 
 		// ---- BEGIN Scene drawing section
-
-		/*// Ruler (to measure tractor)
-		this.pushMatrix();
-		this.rotate(-90 * degToRad, 0, 1, 0);
-		this.scale(1,2,1);
-		this.translate(0,1,0);
-		this.ruler.display();
-		this.popMatrix();*/
 		
-
 		// Terrain
 		this.pushMatrix();
 		this.terrain.display();
@@ -245,7 +257,15 @@ class LightingScene extends CGFscene
 		this.crane.display();
 		this.popMatrix();
 		// ---- END Scene drawing section
-	//this.tractor.updateWheels(currTime);
+	
+	};
+	update(currTime){
+		let delta = currTime - this.prevTime;
+		this.prevTime = currTime;
+
+		this.checkKeys();
+		this.tractor.update(delta);
+
 	};
 
 	showInstructions()
