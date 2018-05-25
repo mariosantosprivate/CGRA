@@ -56,10 +56,19 @@ class LightingScene extends CGFscene
 		this.tractor = new MyVehicle(this);
 		this.pickUpZone = new MyCube(this);
 		this.crane = new MyCrane(this, -5, 0, -5);
-		
+		this.pillar = new MyCylinder(this,40,40);
+		this.pillarTop = new MyCircle(this,40);
+		this.pillarBottom = new MyCircle(this,40);
 
 		//Materials
 		this.materialDefault = new CGFappearance(this);
+
+		this.bodyPillar = new CGFappearance(this);
+        this.bodyPillar.loadTexture('../resources/images/tractorface.png');
+		this.bodyPillar.setAmbient(1,1,1,1);
+		this.bodyPillar.setDiffuse(0.6,0.6,0.6,1);
+		this.bodyPillar.setSpecular(0.8,0.8,0.8,1);	
+		this.bodyPillar.setShininess(200);
 
 		this.enableTextures(true);
 		
@@ -268,6 +277,32 @@ class LightingScene extends CGFscene
 		this.scale(5,0.2,5);
 		this.pickUpZone.display();
 		this.popMatrix();
+
+		// Pillar
+		this.pushMatrix();
+		this.translate(25, 2, 25);
+		this.rotate(Math.PI/2,1,0,0);
+		this.scale(2,2,5);
+		this.bodyPillar.apply();
+		this.pillar.display();
+		this.popMatrix();
+
+		this.pushMatrix();
+		this.translate(25, 4.2, 25);
+		this.rotate(Math.PI/2,-1,0,0);
+		this.scale(2,2,5);
+		this.bodyPillar.apply();
+		this.pillarTop.display();
+		this.popMatrix();
+
+		this.pushMatrix();
+		this.translate(25, -0.7, 25);
+		this.rotate(Math.PI/2,1,0,0);
+		this.scale(2,2,5);
+		this.bodyPillar.apply();
+		this.pillarTop.display();
+		this.popMatrix();
+
 		// ---- END Scene drawing section
 
 
