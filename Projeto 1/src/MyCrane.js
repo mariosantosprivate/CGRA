@@ -23,7 +23,8 @@ class MyCrane extends CGFobject
 		this.stringArm = new MyCubeM(this.scene);
         this.magnet = new MyCylinder(this.scene, 20, 1);
         this.magnetTop = new MyCircle(this.scene, 20);
-		this.magnetBottom = new MyCircle(this.scene, 20);
+        this.magnetBottom = new MyCircle(this.scene, 20);
+        
         // Materials
 
         this.materialDefault = new CGFappearance(this.scene);
@@ -48,6 +49,8 @@ class MyCrane extends CGFobject
     {
 
 		this.scene.translate(this.x, this.y, this.z);
+        
+        this.scene.translate(5,0,5);
         
         this.scene.pushMatrix();
         this.craneAppearance.apply();
@@ -84,7 +87,7 @@ class MyCrane extends CGFobject
         this.scene.pushMatrix();
         this.scene.translate(0,1,0);
         this.scene.rotate(1/2*Math.PI,1,0,0);
-        this.scene.scale(10,10,0.05,1);
+        this.scene.scale(80,80,0.2,1);
         this.magnet.display();
 
         this.scene.pushMatrix();
@@ -107,9 +110,9 @@ class MyCrane extends CGFobject
 
 		//console.log(this.mz);
 
-		this.mx = Math.sin(this.horizontalAngle*Math.PI/8)*Math.cos(this.verticalAngle*Math.PI/8);
+		this.mx = -10+24*Math.sin(this.horizontalAngle*Math.PI/8)+Math.cos(this.verticalAngle*Math.PI/8);
     	this.my = Math.sin(this.verticalAngle*Math.PI/8);
-    	this.mz = Math.cos(this.horizontalAngle*Math.PI/8)*Math.cos(this.verticalAngle*Math.PI/8);
+    	this.mz = 24*Math.cos(this.horizontalAngle*Math.PI/8)+Math.cos(this.verticalAngle*Math.PI/8);
 
     };
 
@@ -132,12 +135,18 @@ class MyCrane extends CGFobject
     }
 
     rotateUp(currTime){
-		this.verticalAngle = this.verticalAngle + (360/60.0)*(currTime/100.0)
+        if(this.verticalAngle > Math.PI/2)
+            this.verticalAngle = Math.PI/2;
+        else
+		    this.verticalAngle = this.verticalAngle + (360/60.0)*(currTime/100.0)
     	
     }
 
     rotateDown(currTime){
-		this.verticalAngle = this.verticalAngle - (360/60.0)*(currTime/100.0)
+    if(this.verticalAngle < -Math.PI*0.05)
+            this.verticalAngle = -Math.PI*0.05;
+        else
+		    this.verticalAngle = this.verticalAngle - (360/60.0)*(currTime/100.0)
     }
 
 };

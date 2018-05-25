@@ -158,7 +158,7 @@ updateLights()
     display()
     {
         this.scene.pushMatrix();
-			
+		this.scene.translate(0,0,-1);	
         this.scene.translate(this.x, this.y, this.z);
         this.scene.rotate(this.angle*degToRad, 0, 1, 0);
         
@@ -448,7 +448,8 @@ updateLights()
     resetVehicle(){
     	this.x = 0;
     	this.y = 0;
-    	this.z = 0;
+        this.z = 0;
+        this.stucky = false;
     	this.angle = 0.0000000001;
     	this.tractorAngleT = 0.0000000001;
         this.bodyAngle= 0.0;

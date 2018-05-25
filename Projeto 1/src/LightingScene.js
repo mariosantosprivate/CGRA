@@ -31,7 +31,6 @@ class LightingScene extends CGFscene
 		this.Light1=true;  
 		this.Light2=true; 
 		this.Light3=true; 
-		this.stucky=false;
 		this.speed=3;
 		
 		this.Axis=true;
@@ -244,7 +243,12 @@ class LightingScene extends CGFscene
 		// ---- END Background, camera and axis setup
 
 		// ---- BEGIN Scene drawing section
-		
+
+		// Crane
+		this.pushMatrix();
+		this.crane.display();
+		this.popMatrix();
+
 		// Terrain
 		this.pushMatrix();
 		this.terrain.display();
@@ -252,13 +256,11 @@ class LightingScene extends CGFscene
 
 		// Vehicle
 		this.pushMatrix();
+		this.translate(10,0,10);
 		this.tractor.display();
 		this.popMatrix();
 
-		// Crane
-		this.pushMatrix();
-		this.crane.display();
-		this.popMatrix();
+
 
 		// Pickup Zone
 		this.pushMatrix();
@@ -269,18 +271,22 @@ class LightingScene extends CGFscene
 		// ---- END Scene drawing section
 
 
-		if(this.tractor.x > -5.5 && this.tractor.x < -2.5 && this.tractor.z > 17.5 && this.tractor.z < 20.5 ){
-			this.stucky = true;
+		if(this.tractor.x > -10 && this.tractor.x < -8 && this.tractor.z > 15 && this.tractor.z < 19 ){
+			this.tractor.stucky = true;
 		}
-		if(this.stucky){
-			this.tractor.x = -3+this.crane.mx*24.3;
-			this.tractor.y= 1 + this.crane.my*10;
-			this.tractor.z = -5+this.crane.mz*24.3;
+		if(this.tractor.stucky){
+			this.tractor.x = this.crane.mx;
+			this.tractor.y = 0.5+10.5*this.crane.my;
+			this.tractor.z = this.crane.mz-10;
 			this.tractor.speed = 0;
 			this.tractor.angle = 0;
 		}
-		
-		console.log(Math.sqrt(Math.pow(this.tractor.x+5,2) + Math.pow(this.tractor.z+5,2)));
+		var text = "X: ";
+		text += this.tractor.x;
+		text += " Z: ";
+		text += 2*this.tractor.z;
+		console.log(text);
+
 	
 	};
 	update(currTime){
