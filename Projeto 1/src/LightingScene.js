@@ -32,7 +32,7 @@ class LightingScene extends CGFscene
 		this.Light2=true; 
 		this.Light3=true; 
 		this.speed=3;
-		
+		this.fall=0;
 		this.Axis=true;
 		
 		this.texture='Main'; 
@@ -275,17 +275,45 @@ class LightingScene extends CGFscene
 			this.tractor.stucky = true;
 		}
 		if(this.tractor.stucky){
+			
 			this.tractor.x = this.crane.mx;
 			this.tractor.y = 0.5+10.5*this.crane.my;
 			this.tractor.z = this.crane.mz-10;
 			this.tractor.speed = 0;
 			this.tractor.angle = 0;
+			if(this.crane.verticalAngle < 1) this.crane.rotateUp(0.05*this.speed);
+			if(this.crane.horizontalAngle > -6)this.crane.rotateRight(0.1*this.speed);
+			if(this.crane.verticalAngle >= 1 && this.crane.horizontalAngle <= -6) {
+				if(this.fall < 10) this.fall++;
+				else if(this.fall < 30) this.fall+=2;
+				else if(this.fall < 50) this.fall+=4;
+				else if(this.fall < 80) this.fall+=8;
+				else {
+					this.fall = 80;
+					this.tractor.resetVehicle2();
+				}
+				if(this.tractor.y > 0.05) this.tractor.fall(this.fall);
+			}
+			else this.tractor.y = 0.5+10.5*this.crane.my;
+		} else {
+			this.fall = 0;
+			if(this.crane.verticalAngle > 0) this.crane.rotateDown(0.05*this.speed);
+			if(this.crane.horizontalAngle < 0)this.crane.rotateLeft(0.1*this.speed);
 		}
+		
 		var text = "X: ";
 		text += this.tractor.x;
 		text += " Z: ";
-		text += 2*this.tractor.z;
-		console.log(text);
+		text += this.tractor.z;
+		text += " VA: ";
+		text += this.crane.verticalAngle;
+		text += " HA: ";
+		text += this.crane.horizontalAngle;
+		text += " Fall: ";
+		text += this.fall;
+		text += " Stucky:"
+		text += this.stucky;
+		//console.log(text);
 
 	
 	};

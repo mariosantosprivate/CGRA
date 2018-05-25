@@ -445,10 +445,26 @@ updateLights()
         }
     };
 
+	fall(currTime){
+		this.y = this.y -(360/60.0)*(currTime/100.0)
+	}
     resetVehicle(){
     	this.x = 0;
     	this.y = 0;
         this.z = 0;
+        this.stucky = false;
+    	this.angle = 0.0000000001;
+    	this.tractorAngleT = 0.0000000001;
+        this.bodyAngle= 0.0;
+        this.frontWheels.rotationAngle=0;
+        this.moveLeft = 0;
+        this.moveRight = 0;
+        this.speed = 0.0;
+    };
+    resetVehicle2(){
+    	this.x = -25.95;
+    	this.y = 0;
+        this.z = -26.125;
         this.stucky = false;
     	this.angle = 0.0000000001;
     	this.tractorAngleT = 0.0000000001;
