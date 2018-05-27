@@ -33,7 +33,7 @@ class LightingScene extends CGFscene
 		this.Light3=true; 
 		this.speed=3;
 		this.fall=0;
-		this.Axis=true;
+		this.Axis=false;
 		
 		this.texture='Main'; 
 
@@ -82,48 +82,52 @@ class LightingScene extends CGFscene
 
 	initLights() 
 	{
-		this.setGlobalAmbientLight(1,1,1,1);
+		this.setGlobalAmbientLight(0.5,0.5,0.5,1);
 
 		// Lights positions
 
-		//this.lights[0].setPosition(-2.2, 1, 1.3, 1);
-		//this.lights[1].setPosition(-2.2, 1, 0.7, 1);
-		this.lights[2].setPosition(-4, 4, 4, 1);
-		this.lights[3].setPosition(-1,10, 1, 1);
+		this.lights[0].setPosition(-2.2, 20, 1.3, 1);
+		this.lights[1].setPosition(-2.2, 20, 0.7, 1);
+		this.lights[2].setPosition(-4, 20, 4, 1);
+		this.lights[3].setPosition(-1,20, 1, 1);
 
 		// Properties
 		
-		//this.lights[0].setAmbient(0, 0, 0, 1);
-		//this.lights[0].setDiffuse(1, 1, 0.5, 1.0);
-		//this.lights[0].setSpecular(1,1,0.5,1);
+		this.lights[0].setAmbient(0, 0, 0, 1);
+		this.lights[0].setDiffuse(1, 1, 1.0, 1.0);
+		this.lights[0].setSpecular(1,1,0.5,1);
 
-		//this.lights[1].setAmbient(0, 0, 0, 1);
-		//this.lights[1].setDiffuse(1, 1, 0.5, 1.0);
-		//this.lights[0].setSpecular(1,1,0.5,1);
+		this.lights[1].setAmbient(0, 0, 0, 1);
+		this.lights[1].setDiffuse(1, 1, 1.0, 1.0);
+		this.lights[1].setSpecular(1,1,0.5,1);
 
 		this.lights[2].setAmbient(0, 0, 0, 1);
-		this.lights[2].setDiffuse(1.0, 1.0, 1.0, 10);
-		this.lights[2].setSpecular(0.5,0.5,1,10);
+		this.lights[2].setDiffuse(1.0, 1.0, 1.0, 1);
+		this.lights[2].setSpecular(0.5,0.5,1,1);
 
-		this.lights[3].setAmbient(10, 10, 10, 1);
-		this.lights[3].setDiffuse(100.0, 100.0, 100.0, 1.0);
-		this.lights[3].setSpecular(50,50,80,1);
+		this.lights[3].setAmbient(0.3, 0.3, 0.3, 1);
+		this.lights[3].setDiffuse(1.0, 1.0, 1.0, 1.0);
+		this.lights[3].setSpecular(0.5,0.5,0.5,1);
 	};
 
 	updateLights() 
 	{
-		if(this.Light0) this.lights[0].enable();
-		else this.lights[0].disable();
-		this.lights[0].setVisible(this.Light0);
-		if(this.Light1) this.lights[1].enable();
-		else this.lights[1].disable();
-		this.lights[1].setVisible(this.Light1);
-		if(this.Light2) this.lights[2].enable();
-		else this.lights[2].disable();
-		this.lights[2].setVisible(this.Light2);
-		if(this.Light3) this.lights[3].enable();
-		else this.lights[3].disable();
-		this.lights[3].setVisible(this.Light3);
+		if(this.Light0) 
+			this.lights[0].enable();
+		else 
+			this.lights[0].disable();
+		if(this.Light1) 
+			this.lights[1].enable();
+		else 
+			this.lights[1].disable();
+		if(this.Light2) 
+			this.lights[2].enable();
+		else 
+			this.lights[2].disable();
+		if(this.Light3) 
+			this.lights[3].enable();
+		else 
+			this.lights[3].disable();
 		for (var i = 0; i < this.lights.length; i++)
 			this.lights[i].update();
 	}
@@ -172,10 +176,10 @@ class LightingScene extends CGFscene
 		else if(pressingA == false && pressingD == false && this.tractor.frontWheels.rotationAngle < -0.05)
 		this.tractor.frontWheels.turnLeft(0.03);
 
-		if(pressingW == false && pressingS == false && this.tractor.speed > 0.05)
+		/*if(pressingW == false && pressingS == false && this.tractor.speed > 0.05)
 		this.tractor.speed -= 0.1;
 		else if(pressingW == false && pressingS == false && this.tractor.speed < -0.05)
-		this.tractor.speed += 0.1;
+		this.tractor.speed += 0.1;*/
 
 		/* CRANE */
 
@@ -361,7 +365,7 @@ class LightingScene extends CGFscene
 
 	};
 
-	showInstructions()
+	Instructions()
 	{ 
 	console.log("Press W to go forward. Press S to go back."); 
 	console.log("Press A to rotate left. Press D to rotate right.");

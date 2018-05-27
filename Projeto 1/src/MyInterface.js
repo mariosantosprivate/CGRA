@@ -35,7 +35,8 @@ class MyInterface extends CGFinterface {
 		// the identifier 'doSomething' must be a function declared as part of that object (i.e. a member of the scene class)
 		// e.g. LightingScene.prototype.doSomething = function () { console.log("Doing something..."); }; 
 
-		this.gui.add(this.scene, 'showInstructions');	
+		
+		this.gui.add(this.scene, 'Instructions');	
 
 		var Lgroup=this.gui.addFolder("Lights");
 		//Lgroup.open();
@@ -54,7 +55,7 @@ class MyInterface extends CGFinterface {
 		// min and max values can be specified as parameters
 
 		this.gui.add(this.scene, 'texture', [ 'Main', 'Red', 'Cow', 'Face' ] );
-		this.gui.add(this.scene, 'speed', -5, 5);
+		this.gui.add(this.scene, 'speed', -10, 10);
 		this.gui.add(this.scene, 'Axis');
 		this.initKeys();
 		return true;

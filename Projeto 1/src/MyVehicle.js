@@ -92,8 +92,8 @@ class MyVehicle extends CGFobject
 		this.lightAppearance.setDiffuse(0.9,0.9,0.5,1);
 		this.lightAppearance.setSpecular(0.9,0.9,0.5,1);	
         this.lightAppearance.setShininess(200);
-        this.initLights();
     };
+    /*
     initLights() 
 	{
     this.scene.setGlobalAmbientLight(0.1,0.1,0.1,1);
@@ -113,8 +113,8 @@ class MyVehicle extends CGFobject
     this.scene.lights[3].setVisible(false); // show marker on light position (different from enabled)
     */
     // Properties
-    // Front
-    this.scene.lights[0].setAmbient(0.2, 0.2, 0.1, 1);
+    // Front/*
+   /* this.scene.lights[0].setAmbient(0.2, 0.2, 0.1, 1);
     this.scene.lights[0].setDiffuse(1, 1, 0.5, 1.0);
     this.scene.lights[0].setSpecular(1,1,0.5,1);
     //this.scene.lights[0].enable(this.Light0);
@@ -134,7 +134,7 @@ class MyVehicle extends CGFobject
      this.scene.lights[3].setDiffuse(1, 0, 0, 1.0);
      this.scene.lights[3].setSpecular(1, 0, 0,1);
      //this.scene.lights[1].enable(this.Light1);
-*/
+
     
 }
 
@@ -148,9 +148,9 @@ updateLights()
     this.scene.lights[2].setVisible(this.Light1);
     this.scene.lights[3].enable(this.Light1);
     this.scene.lights[3].setVisible(this.Light1);*/
-    for (var i = 0; i < this.scene.lights.length; i++)
+  /*  for (var i = 0; i < this.scene.lights.length; i++)
         this.scene.lights[i].update();
-}
+}*/
 
 	
 
